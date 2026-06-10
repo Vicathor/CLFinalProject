@@ -110,6 +110,7 @@ export function TopicDetail({ topic }: Readonly<TopicDetailProps>) {
         sourceId={topic.id}
         title="Feedback on this topic"
         compact
+        hideTitle
       />
     </article>
   );
