@@ -1,3 +1,6 @@
+import { Pencil } from "lucide-react";
+import Link from "next/link";
+
 import type { StudentProfile } from "@/types/profile";
 
 type SituationSummaryProps = {
@@ -47,9 +50,19 @@ export function SituationSummary({
 
   return (
     <section className="space-y-3 rounded-lg border border-zinc-200 bg-white p-4">
-      <h3 className="text-base font-semibold text-zinc-950">
-        Your situation
-      </h3>
+      <div className="flex items-center justify-between">
+        <h3 className="text-base font-semibold text-zinc-950">
+          Your situation
+        </h3>
+        <Link
+          href="/onboarding"
+          aria-label="Edit your answers"
+          className="flex items-center gap-1 rounded-md px-2 py-1 text-sm font-medium text-teal-700 transition-colors hover:bg-teal-50"
+        >
+          <Pencil className="size-4" />
+          Edit
+        </Link>
+      </div>
       <div className="flex flex-wrap gap-2">
         {items.map((item) => (
           <span

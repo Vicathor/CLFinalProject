@@ -29,7 +29,6 @@ export function DashboardClient() {
     return (
       <section className="space-y-5">
         <div>
-          <p className="text-sm font-medium text-teal-700">Overview</p>
           <h2 className="mt-2 text-3xl font-semibold leading-tight text-zinc-950">
             Dashboard
           </h2>
@@ -44,7 +43,6 @@ export function DashboardClient() {
     return (
       <section className="space-y-5">
         <div>
-          <p className="text-sm font-medium text-teal-700">Overview</p>
           <h2 className="mt-2 text-3xl font-semibold leading-tight text-zinc-950">
             Dashboard
           </h2>
@@ -71,7 +69,6 @@ export function DashboardClient() {
   return (
     <section className="space-y-5">
       <div>
-        <p className="text-sm font-medium text-teal-700">Overview</p>
         <h2 className="mt-2 text-3xl font-semibold leading-tight text-zinc-950">
           Dashboard
         </h2>
@@ -90,21 +87,6 @@ export function DashboardClient() {
       <SituationSummary profile={profile} />
       <ProgressSummary progress={progress} />
       <NextActions tasks={nextActions} onMarkDone={handleMarkDone} />
-
-      <div className="grid gap-3">
-        <Link
-          href="/checklist"
-          className="flex h-12 w-full items-center justify-center rounded-md bg-teal-700 px-4 text-sm font-semibold text-white transition-colors hover:bg-teal-800"
-        >
-          Open checklist
-        </Link>
-        <Link
-          href="/onboarding"
-          className="flex h-11 w-full items-center justify-center rounded-md border border-zinc-200 bg-white px-4 text-sm font-semibold text-zinc-700 transition-colors hover:bg-zinc-100"
-        >
-          Edit answers
-        </Link>
-      </div>
     </section>
   );
 }

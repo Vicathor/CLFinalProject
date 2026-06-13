@@ -113,6 +113,7 @@ export function FaqResultCard({ result }: Readonly<FaqResultCardProps>) {
         sourceId={faq.id}
         title="Feedback on this FAQ"
         compact
+        embedded
       />
     </article>
   );

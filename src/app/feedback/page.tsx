@@ -6,7 +6,6 @@ export default function FeedbackPage() {
   return (
     <section className="space-y-6">
       <div>
-        <p className="text-sm font-medium text-teal-700">Improve the guide</p>
         <h2 className="mt-2 text-3xl font-semibold leading-tight text-zinc-950">
           Feedback
         </h2>

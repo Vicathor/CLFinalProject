@@ -5,7 +5,7 @@ export type AppRoute = {
 
 export const primaryRoutes = [
   {
-    href: "/",
+    href: "/dashboard",
     label: "Home",
   },
   {

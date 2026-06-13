@@ -45,7 +45,6 @@ export function TopicDetail({ topic }: Readonly<TopicDetailProps>) {
           Back to topics
         </Link>
         <div>
-          <p className="text-sm font-medium text-teal-700">Topic guide</p>
           <h2 className="mt-2 text-3xl font-semibold leading-tight text-zinc-950">
             {topic.title}
           </h2>
@@ -111,6 +110,7 @@ export function TopicDetail({ topic }: Readonly<TopicDetailProps>) {
         sourceId={topic.id}
         title="Feedback on this topic"
         compact
+        hideTitle
       />
     </article>
   );

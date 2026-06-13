@@ -4,9 +4,8 @@ export function Header() {
       <div className="flex items-center justify-between">
         <div>
           <p className="text-xs font-semibold uppercase tracking-wide text-teal-700">
-            Student guide
+            University of Twente
           </p>
-          <h1 className="text-lg font-semibold text-zinc-950">NL First 100</h1>
         </div>
       </div>
     </header>

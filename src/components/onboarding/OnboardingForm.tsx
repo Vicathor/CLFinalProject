@@ -1,10 +1,12 @@
 "use client";
 
+import { ChevronLeft, ChevronRight } from "lucide-react";
+import Image from "next/image";
 import { useRouter } from "next/navigation";
-import { useMemo, useState } from "react";
+import { useState } from "react";
 
-import { QuestionCard } from "@/components/onboarding/QuestionCard";
 import { useAppState } from "@/hooks/useAppState";
+import { cn } from "@/lib/utils";
 import type {
   BsnStatus,
   HousingStatus,
@@ -22,35 +24,71 @@ type OnboardingAnswers = {
   workOrPaidInternship?: WorkOrPaidInternship;
 };
 
-const residencyOptions = [
-  { label: "EU/EEA/Swiss", value: "eu_eea_swiss" },
-  { label: "Non-EU/EEA", value: "non_eu_eea" },
-  { label: "Not sure", value: "not_sure" },
-] as const;
+type StepConfig = {
+  key: keyof OnboardingAnswers;
+  title: string;
+  subtitle: string;
+  // Illustration file in /public/illustrations, drawn on the teal hero.
+  illustration: string;
+  options: readonly { label: string; value: string }[];
+};
 
-const housingOptions = [
-  { label: "I have housing", value: "confirmed" },
-  { label: "Still searching", value: "searching" },
-  { label: "Temporary housing only", value: "temporary_only" },
-  { label: "Not started", value: "not_started" },
-] as const;
-
-const arrivalOptions = [
-  { label: "Before arrival", value: "before_arrival" },
-  { label: "Already arrived", value: "already_arrived" },
-] as const;
-
-const bsnOptions = [
-  { label: "Yes", value: "yes" },
-  { label: "No", value: "no" },
-  { label: "Not sure", value: "not_sure" },
-] as const;
-
-const workOptions = [
-  { label: "Yes", value: "yes" },
-  { label: "No", value: "no" },
-  { label: "Maybe", value: "maybe" },
-] as const;
+const steps: readonly StepConfig[] = [
+  {
+    key: "residencyCategory",
+    title: "Where are you coming from?",
+    subtitle: "This shapes your visa and registration steps.",
+    illustration: "/illustrations/step1.svg",
+    options: [
+      { label: "EU / EEA / Swiss", value: "eu_eea_swiss" },
+      { label: "Non-EU / EEA", value: "non_eu_eea" },
+    ],
+  },
+  {
+    key: "housingStatus",
+    title: "How's your housing?",
+    subtitle: "We'll prioritise what you still need to sort out.",
+    illustration: "/illustrations/step2.svg",
+    options: [
+      { label: "I have housing", value: "confirmed" },
+      { label: "Still searching", value: "searching" },
+      { label: "Temporary housing only", value: "temporary_only" },
+      { label: "Not started", value: "not_started" },
+    ],
+  },
+  {
+    key: "onboardingArrivalStatus",
+    title: "Have you arrived yet?",
+    subtitle: "Your timeline shapes the very first steps.",
+    illustration: "/illustrations/step3.svg",
+    options: [
+      { label: "Yes", value: "already_arrived" },
+      { label: "No", value: "before_arrival" },
+    ],
+  },
+  {
+    key: "bsnStatus",
+    title: "Do you have a BSN?",
+    subtitle: "Your citizen service number unlocks many services.",
+    illustration: "/illustrations/step4.svg",
+    options: [
+      { label: "Yes, I have one", value: "yes" },
+      { label: "Not yet", value: "no" },
+      { label: "Not sure", value: "not_sure" },
+    ],
+  },
+  {
+    key: "workOrPaidInternship",
+    title: "Planning to work or intern?",
+    subtitle: "We'll add tax and permit guidance if you are.",
+    illustration: "/illustrations/step5.svg",
+    options: [
+      { label: "Yes", value: "yes" },
+      { label: "No", value: "no" },
+      { label: "Maybe later", value: "maybe" },
+    ],
+  },
+];
 
 function isComplete(answers: OnboardingAnswers) {
   return Boolean(
@@ -96,87 +134,112 @@ function createProfile(answers: Required<OnboardingAnswers>): StudentProfile {
 
 export function OnboardingForm() {
   const router = useRouter();
-  const { saveProfile, clearAllLocalData, storageAvailable, isHydrated } =
-    useAppState();
+  const { saveProfile, storageAvailable, isHydrated } = useAppState();
   const [answers, setAnswers] = useState<OnboardingAnswers>({});
-  const canSubmit = useMemo(() => isComplete(answers), [answers]);
+  const [stepIndex, setStepIndex] = useState(0);
 
-  function updateAnswer<TKey extends keyof OnboardingAnswers>(
-    key: TKey,
-    value: NonNullable<OnboardingAnswers[TKey]>,
-  ) {
-    setAnswers((currentAnswers) => ({
-      ...currentAnswers,
-      [key]: value,
-    }));
-  }
+  const step = steps[stepIndex];
+  const isLastStep = stepIndex === steps.length - 1;
 
-  function handleSubmit(event: React.FormEvent<HTMLFormElement>) {
-    event.preventDefault();
+  function selectOption(value: string) {
+    const updated = { ...answers, [step.key]: value };
+    setAnswers(updated);
 
-    if (!isComplete(answers)) {
+    if (!isLastStep) {
+      setStepIndex((index) => index + 1);
       return;
     }
 
-    saveProfile(createProfile(answers as Required<OnboardingAnswers>));
-    router.push("/dashboard");
+    if (isComplete(updated)) {
+      saveProfile(createProfile(updated as Required<OnboardingAnswers>));
+      router.push("/dashboard");
+    }
+  }
+
+  function goBack() {
+    if (stepIndex === 0) {
+      router.push("/");
+      return;
+    }
+    setStepIndex((index) => Math.max(0, index - 1));
   }
 
   return (
-    <form onSubmit={handleSubmit} className="space-y-5">
-      <QuestionCard
-        title="Residency category"
-        options={residencyOptions}
-        value={answers.residencyCategory}
-        onChange={(value) => updateAnswer("residencyCategory", value)}
-      />
-      <QuestionCard
-        title="Housing status"
-        options={housingOptions}
-        value={answers.housingStatus}
-        onChange={(value) => updateAnswer("housingStatus", value)}
-      />
-      <QuestionCard
-        title="Arrival status"
-        options={arrivalOptions}
-        value={answers.onboardingArrivalStatus}
-        onChange={(value) => updateAnswer("onboardingArrivalStatus", value)}
-      />
-      <QuestionCard
-        title="BSN status"
-        options={bsnOptions}
-        value={answers.bsnStatus}
-        onChange={(value) => updateAnswer("bsnStatus", value)}
-      />
-      <QuestionCard
-        title="Work or paid internship"
-        options={workOptions}
-        value={answers.workOrPaidInternship}
-        onChange={(value) => updateAnswer("workOrPaidInternship", value)}
-      />
+    <div className="-mx-5 -mt-6 flex min-h-[calc(100dvh-73px)] flex-col">
+      {/* Progress segments */}
+      <div className="flex gap-1.5 px-5 pt-4">
+        {steps.map((segment, index) => (
+          <span
+            key={segment.key}
+            className={cn(
+              "h-1.5 flex-1 rounded-full transition-colors",
+              index <= stepIndex ? "bg-teal-700" : "bg-zinc-200",
+            )}
+          />
+        ))}
+      </div>
 
-      <div className="space-y-3 pt-1">
-        <button
-          type="submit"
-          disabled={!canSubmit}
-          className="h-12 w-full rounded-md bg-teal-700 px-4 text-sm font-semibold text-white transition-colors hover:bg-teal-800 disabled:cursor-not-allowed disabled:bg-zinc-300 disabled:text-zinc-500"
-        >
-          Save and continue
-        </button>
-        <button
-          type="button"
-          onClick={clearAllLocalData}
-          className="h-11 w-full rounded-md border border-zinc-200 bg-white px-4 text-sm font-semibold text-zinc-700 transition-colors hover:bg-zinc-100"
-        >
-          Clear local data
-        </button>
+      {/* Animated step: hero + content transition in together as one unit,
+          both on first mount (arriving from the startup screen) and on every
+          step change. */}
+      <div key={step.key} className="animate-step-in flex flex-1 flex-col">
+        {/* Hero */}
+        <div className="mt-4 flex h-60 items-center justify-center">
+          <Image
+            src={step.illustration}
+            alt=""
+            aria-hidden
+            width={240}
+            height={160}
+            priority
+            className="h-60 w-auto"
+          />
+        </div>
+
+        {/* Content */}
+        <div className="flex flex-1 flex-col px-5 pb-[calc(env(safe-area-inset-bottom)+1.5rem)] pt-2">
+        <p className="text-xs font-semibold uppercase tracking-wide text-teal-700">
+          Step {stepIndex + 1} of {steps.length}
+        </p>
+        <h2 className="mt-1 text-2xl font-semibold leading-tight text-zinc-950">
+          {step.title}
+        </h2>
+        <p className="mt-2 text-sm leading-6 text-zinc-600">{step.subtitle}</p>
+
+        <div className="mt-5 grid gap-3">
+          {step.options.map((option) => (
+            <button
+              key={option.value}
+              type="button"
+              onClick={() => selectOption(option.value)}
+              className="group flex min-h-13 w-full items-center justify-between gap-3 rounded-full border border-zinc-200 bg-white px-5 py-3 text-left text-sm font-medium text-zinc-800 shadow-sm transition-all hover:border-teal-300 hover:bg-teal-50"
+            >
+              <span>{option.label}</span>
+              <ChevronRight className="size-5 shrink-0 text-zinc-300 transition-colors group-hover:text-teal-600" />
+            </button>
+          ))}
+        </div>
+
         {isHydrated && !storageAvailable ? (
-          <p className="text-sm leading-6 text-red-700">
-            Local browser storage is unavailable, so your answers may not
-            persist after reload.
+          <p className="mt-4 text-sm leading-6 text-red-700">
+            Local browser storage is unavailable, so your answers may not persist
+            after reload.
           </p>
         ) : null}
+
+          {/* Navigation */}
+          <div className="mt-auto pt-6">
+            <button
+              type="button"
+              onClick={goBack}
+              className="-ml-2 flex items-center gap-1 rounded-md px-2 py-1 text-sm font-medium text-zinc-400 transition-colors hover:text-zinc-700"
+            >
+              <ChevronLeft className="size-4" />
+              Back
+            </button>
+          </div>
+        </div>
       </div>
-    </form>
+    </div>
   );
 }

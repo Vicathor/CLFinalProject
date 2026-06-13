@@ -44,7 +44,6 @@ export function ChecklistClient() {
     return (
       <section className="space-y-5">
         <div>
-          <p className="text-sm font-medium text-teal-700">Tasks</p>
           <h2 className="mt-2 text-3xl font-semibold leading-tight text-zinc-950">
             Checklist
           </h2>
@@ -59,7 +58,6 @@ export function ChecklistClient() {
     return (
       <section className="space-y-5">
         <div>
-          <p className="text-sm font-medium text-teal-700">Tasks</p>
           <h2 className="mt-2 text-3xl font-semibold leading-tight text-zinc-950">
             Checklist
           </h2>
@@ -86,7 +84,6 @@ export function ChecklistClient() {
   return (
     <section className="space-y-6">
       <div>
-        <p className="text-sm font-medium text-teal-700">Tasks</p>
         <h2 className="mt-2 text-3xl font-semibold leading-tight text-zinc-950">
           Checklist
         </h2>

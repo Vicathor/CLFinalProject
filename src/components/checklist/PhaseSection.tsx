@@ -30,7 +30,7 @@ export function PhaseSection({
           {tasks.length}
         </span>
       </div>
-      <div className="grid gap-3">
+      <div className="grid grid-cols-1 gap-3">
         {tasks.map((task) => (
           <TaskCard
             key={task.id}

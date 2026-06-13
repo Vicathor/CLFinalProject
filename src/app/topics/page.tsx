@@ -7,7 +7,6 @@ export default function TopicsPage() {
   return (
     <section className="space-y-6">
       <div>
-        <p className="text-sm font-medium text-teal-700">Guides</p>
         <h2 className="mt-2 text-3xl font-semibold leading-tight text-zinc-950">
           Topics
         </h2>

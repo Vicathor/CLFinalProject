@@ -15,7 +15,7 @@ import { primaryRoutes } from "@/lib/routes";
 import { cn } from "@/lib/utils";
 
 const navIcons: Record<(typeof primaryRoutes)[number]["href"], LucideIcon> = {
-  "/": Home,
+  "/dashboard": Home,
   "/checklist": ClipboardCheck,
   "/topics": PanelsTopLeft,
   "/ask": CircleHelp,
@@ -30,8 +30,16 @@ function isActiveRoute(pathname: string, href: string) {
   return pathname === href || pathname.startsWith(`${href}/`);
 }
 
+// Routes that make up the focused startup onboarding flow, where the
+// bottom navigation is hidden.
+const hiddenNavRoutes = ["/", "/onboarding"];
+
 export function BottomNav() {
   const pathname = usePathname();
+
+  if (hiddenNavRoutes.includes(pathname)) {
+    return null;
+  }
 
   return (
     <nav
