@@ -6,6 +6,9 @@ export type StorageKey =
   | "nlFirst100:v1:profile"
   | "nlFirst100:v1:taskProgress"
   | "nlFirst100:v1:feedbackResponses"
+  | "nlFirst100:v1:theme"
+  | "nlFirst100:v1:askQuestions"
+  | "nlFirst100:v1:askAnswers"
   | "nlFirst100:v1:onboardingCompleted"
   | "nlFirst100:v1:contentVersion"
   | "nlFirst100:v1:lastVisitedAt";

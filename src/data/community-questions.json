@@ -1,0 +1,127 @@
+[
+  {
+    "id": "cq_housing_shortstay",
+    "category": "community",
+    "title": "Best short-stay options near campus for the first two weeks?",
+    "body": "I arrive late August but my room only starts in September. Where did you stay for the gap? Trying to keep it cheap and close to a bus line to campus.",
+    "authorName": "anya_k",
+    "status": "approved",
+    "createdAt": "2026-05-28",
+    "tags": ["housing", "short stay", "arrival"],
+    "relatedTaskIds": ["housing_sos", "plan_arrival"],
+    "relatedTopicIds": ["housing"],
+    "answers": [
+      {
+        "id": "ca_housing_1",
+        "body": "I booked a hostel in Enschede centre for 10 days and took bus 1 to campus. Reasonable if you split a twin room. Book early though, it fills up around intro week.",
+        "authorName": "marco_p",
+        "verified": false,
+        "createdAt": "2026-05-29"
+      },
+      {
+        "id": "ca_housing_2",
+        "body": "Email the Student Housing office before you arrive. They sometimes hold gap rooms for newly arriving internationals and will tell you what is realistic for your dates.",
+        "authorName": "UT Student Housing",
+        "verified": true,
+        "createdAt": "2026-05-30"
+      }
+    ]
+  },
+  {
+    "id": "cq_bsn_appointment_wait",
+    "category": "community",
+    "title": "How long did you wait for a BSN registration appointment?",
+    "body": "I registered with the municipality online but the first free slot is three weeks away. Is that normal, and can I open a bank account before I have my BSN?",
+    "authorName": "deepa_r",
+    "status": "approved",
+    "createdAt": "2026-06-02",
+    "tags": ["bsn", "municipality", "registration", "banking"],
+    "relatedTaskIds": ["municipality_registration", "bsn", "money_bank_account"],
+    "relatedTopicIds": ["municipality_bsn_digid", "money_banking"],
+    "answers": [
+      {
+        "id": "ca_bsn_1",
+        "body": "Two to three weeks was normal for me in September. Some banks let you open an account first and add the BSN later, so it is worth starting both in parallel.",
+        "authorName": "tomas_v",
+        "verified": false,
+        "createdAt": "2026-06-03"
+      }
+    ]
+  },
+  {
+    "id": "cq_bike_secondhand",
+    "category": "community",
+    "title": "Where to buy a reliable second-hand bike without getting scammed?",
+    "body": "Saw a lot of cheap bikes online but heard some are stolen or fall apart fast. Where did you get yours and roughly what did you pay?",
+    "authorName": "lucia_m",
+    "status": "approved",
+    "createdAt": "2026-06-05",
+    "tags": ["transport", "bike", "daily life"],
+    "relatedTaskIds": ["transport_bike_daily_life"],
+    "relatedTopicIds": ["transport_daily_life"],
+    "answers": [
+      {
+        "id": "ca_bike_1",
+        "body": "I used a registered second-hand shop in Enschede. A bit more than online but it came with a few months of warranty and a real lock. Ask for the purchase receipt.",
+        "authorName": "yuki_s",
+        "verified": false,
+        "createdAt": "2026-06-05"
+      },
+      {
+        "id": "ca_bike_2",
+        "body": "Avoid a bike sold without a key for the lock, and never buy one for 20 euro on the street, it is almost certainly stolen and you can be fined.",
+        "authorName": "marco_p",
+        "verified": false,
+        "createdAt": "2026-06-06"
+      },
+      {
+        "id": "ca_bike_3",
+        "body": "The student association sometimes runs a bike sale at the start of the semester, worth waiting a week for if you can.",
+        "authorName": "anya_k",
+        "verified": false,
+        "createdAt": "2026-06-07"
+      }
+    ]
+  },
+  {
+    "id": "cq_bank_no_bsn",
+    "category": "community",
+    "title": "Which bank worked for you before getting a BSN?",
+    "body": "Non-EU student arriving next week. I need an account fast to pay rent but I will not have a BSN for a while. What worked for you?",
+    "authorName": "samuel_o",
+    "status": "approved",
+    "createdAt": "2026-06-09",
+    "tags": ["banking", "bsn", "money", "non eu"],
+    "relatedTaskIds": ["money_bank_account", "bsn"],
+    "relatedTopicIds": ["money_banking"],
+    "answers": []
+  },
+  {
+    "id": "cq_gp_english",
+    "category": "community",
+    "title": "How do I register with a GP that speaks English?",
+    "body": "Not sure how the GP (huisarts) system works here. Do I need to register before I get sick, and how do I find one taking new patients near campus?",
+    "authorName": "fatima_z",
+    "status": "approved",
+    "createdAt": "2026-06-10",
+    "tags": ["healthcare", "gp", "huisarts", "insurance"],
+    "relatedTaskIds": ["gp_registration", "health_insurance"],
+    "relatedTopicIds": ["healthcare_gp"],
+    "answers": [
+      {
+        "id": "ca_gp_1",
+        "body": "Register as soon as you arrive, not when you are ill. Many practices near campus are used to international students and consult in English.",
+        "authorName": "tomas_v",
+        "verified": false,
+        "createdAt": "2026-06-10"
+      },
+      {
+        "id": "ca_gp_2",
+        "body": "Student Health Services can point you to practices accepting new patients and explain how the GP acts as your first contact before any specialist. Bring your insurance details when you register.",
+        "authorName": "UT Student Services",
+        "verified": true,
+        "createdAt": "2026-06-11"
+      }
+    ]
+  }
+]

@@ -21,7 +21,7 @@ export const primaryRoutes = [
     label: "Ask",
   },
   {
-    href: "/feedback",
-    label: "Feedback",
+    href: "/settings",
+    label: "Settings",
   },
 ] as const satisfies AppRoute[];

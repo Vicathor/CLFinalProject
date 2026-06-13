@@ -1,5 +1,9 @@
 @import "tailwindcss";
 
+/* Theme toggle is class-based: `dark:` utilities respond to a `.dark` class on
+   <html>, not the OS preference. No dark styling is applied yet. */
+@custom-variant dark (&:where(.dark, .dark *));
+
 :root {
   color-scheme: light;
 }

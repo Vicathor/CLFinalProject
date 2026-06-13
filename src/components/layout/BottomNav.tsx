@@ -5,8 +5,8 @@ import {
   ClipboardCheck,
   Home,
   type LucideIcon,
-  MessageSquareText,
   PanelsTopLeft,
+  Settings,
 } from "lucide-react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
@@ -19,7 +19,7 @@ const navIcons: Record<(typeof primaryRoutes)[number]["href"], LucideIcon> = {
   "/checklist": ClipboardCheck,
   "/topics": PanelsTopLeft,
   "/ask": CircleHelp,
-  "/feedback": MessageSquareText,
+  "/settings": Settings,
 };
 
 function isActiveRoute(pathname: string, href: string) {

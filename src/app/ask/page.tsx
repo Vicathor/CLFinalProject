@@ -1,5 +1,5 @@
-import { FaqSearchClient } from "@/components/ask/FaqSearchClient";
+import { AskClient } from "@/components/ask/AskClient";
 
 export default function AskPage() {
-  return <FaqSearchClient />;
+  return <AskClient />;
 }

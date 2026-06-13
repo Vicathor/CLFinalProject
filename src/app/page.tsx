@@ -37,11 +37,7 @@ export default function Home() {
   return (
     <div className="animate-screen-in -mx-5 -mt-6">
       {/* Hero */}
-      <div className="relative overflow-hidden bg-gradient-to-br from-teal-500 via-teal-700 to-teal-900 px-6 pb-16 pt-12 text-white">
-        {/* Decorative glows */}
-        <div className="pointer-events-none absolute -right-12 -top-10 size-44 rounded-full bg-white/10 blur-2xl" />
-        <div className="pointer-events-none absolute -bottom-8 -left-10 size-40 rounded-full bg-emerald-300/20 blur-2xl" />
-
+      <div className="relative overflow-hidden bg-teal-700 px-6 pb-16 pt-12 text-white">
         <div className="relative">
           <span className="flex size-14 items-center justify-center rounded-2xl bg-white/15 ring-1 ring-white/25 backdrop-blur">
             <GraduationCap className="size-7" strokeWidth={1.75} />

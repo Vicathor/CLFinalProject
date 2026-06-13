@@ -46,11 +46,11 @@ const stopWords = new Set([
   "you",
 ]);
 
-function normalize(value: string) {
+export function normalize(value: string) {
   return value.trim().toLowerCase().replace(/[-_/]+/g, " ");
 }
 
-function getQueryTerms(query: string) {
+export function getQueryTerms(query: string) {
   return normalize(query)
     .split(/\s+/)
     .filter((term) => term.length >= 2 && !stopWords.has(term));

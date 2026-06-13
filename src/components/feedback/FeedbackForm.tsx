@@ -14,6 +14,7 @@ type FeedbackFormProps = {
   sourceType?: FeedbackSourceType;
   sourceId?: string;
   title?: string;
+  helpfulnessPrompt?: string;
   compact?: boolean;
   hideTitle?: boolean;
   embedded?: boolean;
@@ -32,6 +33,7 @@ export function FeedbackForm({
   sourceType = "general",
   sourceId,
   title = "Share feedback",
+  helpfulnessPrompt = "Was this helpful?",
   compact = false,
   hideTitle = false,
   embedded = false,
@@ -82,7 +84,7 @@ export function FeedbackForm({
       <div className="space-y-2">
         <div className="flex items-center justify-between gap-3">
           <span className="text-sm font-semibold text-zinc-800">
-            Was this helpful?
+            {helpfulnessPrompt}
           </span>
           <div className="flex items-center gap-2">
             <button

@@ -1,0 +1,27 @@
+"use client";
+
+import { useAppState } from "@/hooks/useAppState";
+
+export function ClearDataButton() {
+  const { clearAllLocalData } = useAppState();
+
+  function handleClear() {
+    const confirmed = window.confirm(
+      "Clear all locally saved data on this device? This removes your profile, checklist progress, feedback, and posts. This cannot be undone.",
+    );
+
+    if (confirmed) {
+      clearAllLocalData();
+    }
+  }
+
+  return (
+    <button
+      type="button"
+      onClick={handleClear}
+      className="h-11 w-full rounded-md text-sm font-semibold text-red-600 transition-colors hover:bg-red-50"
+    >
+      Clear local data
+    </button>
+  );
+}
