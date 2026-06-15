@@ -42,42 +42,42 @@ function formatDate(iso: string) {
 
 function FeedbackCard({ feedback }: Readonly<{ feedback: FeedbackResponse }>) {
   return (
-    <article className="space-y-2 rounded-lg border border-zinc-200 bg-white p-4">
+    <article className="space-y-2 rounded-lg border border-zinc-200 dark:border-white/5 bg-white dark:bg-[#18221f] p-4">
       <div className="flex items-center justify-between gap-3">
-        <span className="inline-flex items-center rounded-full bg-zinc-100 px-2 py-0.5 text-xs font-semibold text-zinc-600">
+        <span className="inline-flex items-center rounded-full bg-zinc-100 dark:bg-white/5 px-2 py-0.5 text-xs font-semibold text-zinc-600 dark:text-[#9fb0ad]">
           {sourceLabels[feedback.sourceType]}
           {feedback.sourceId ? `: ${feedback.sourceId}` : ""}
         </span>
-        <span className="shrink-0 text-xs text-zinc-400">
+        <span className="shrink-0 text-xs text-zinc-400 dark:text-[#7e908c]">
           {formatDate(feedback.createdAt)}
         </span>
       </div>
 
-      <div className="flex items-center gap-2 text-sm font-medium text-zinc-700">
+      <div className="flex items-center gap-2 text-sm font-medium text-zinc-700 dark:text-[#9fb0ad]">
         {feedback.wasHelpful === true ? (
           <>
-            <ThumbsUp className="size-4 text-teal-700" />
+            <ThumbsUp className="size-4 text-teal-700 dark:text-teal-400" />
             Helpful
           </>
         ) : feedback.wasHelpful === false ? (
           <>
-            <ThumbsDown className="size-4 text-red-600" />
+            <ThumbsDown className="size-4 text-red-600 dark:text-red-400" />
             Not helpful
           </>
         ) : (
-          <span className="text-zinc-400">No rating</span>
+          <span className="text-zinc-400 dark:text-[#7e908c]">No rating</span>
         )}
       </div>
 
       {feedback.issueType ? (
-        <p className="text-sm text-zinc-600">
-          <span className="font-semibold text-zinc-800">Issue: </span>
+        <p className="text-sm text-zinc-600 dark:text-[#9fb0ad]">
+          <span className="font-semibold text-zinc-800 dark:text-[#e7edeb]">Issue: </span>
           {issueLabels[feedback.issueType]}
         </p>
       ) : null}
 
       {feedback.comment ? (
-        <p className="text-sm leading-6 text-zinc-600">{feedback.comment}</p>
+        <p className="text-sm leading-6 text-zinc-600 dark:text-[#9fb0ad]">{feedback.comment}</p>
       ) : null}
     </article>
   );
@@ -92,22 +92,22 @@ export function MyFeedbackClient() {
     <section className="space-y-6">
       <Link
         href="/settings"
-        className="text-sm font-semibold text-teal-800 underline decoration-2 underline-offset-4"
+        className="text-sm font-semibold text-teal-800 dark:text-teal-400 underline decoration-2 underline-offset-4"
       >
         Back to Settings
       </Link>
 
       <div>
-        <h2 className="mt-2 text-3xl font-semibold leading-tight text-zinc-950">
+        <h2 className="mt-2 text-3xl font-semibold leading-tight text-zinc-950 dark:text-[#e7edeb]">
           My feedback
         </h2>
-        <p className="mt-3 text-base leading-7 text-zinc-600">
+        <p className="mt-3 text-base leading-7 text-zinc-600 dark:text-[#9fb0ad]">
           Feedback you have saved on this device.
         </p>
       </div>
 
       {!isHydrated ? (
-        <div className="h-24 rounded-lg bg-zinc-100" />
+        <div className="h-24 rounded-lg bg-zinc-100 dark:bg-white/5" />
       ) : items.length > 0 ? (
         <div className="grid grid-cols-1 gap-3">
           {items.map((feedback) => (
@@ -115,8 +115,8 @@ export function MyFeedbackClient() {
           ))}
         </div>
       ) : (
-        <div className="rounded-lg border border-zinc-200 bg-white p-4">
-          <p className="text-sm leading-6 text-zinc-600">
+        <div className="rounded-lg border border-zinc-200 dark:border-white/5 bg-white dark:bg-[#18221f] p-4">
+          <p className="text-sm leading-6 text-zinc-600 dark:text-[#9fb0ad]">
             You have not saved any feedback yet. Use the feedback controls
             around the app or the General feedback form in Settings.
           </p>

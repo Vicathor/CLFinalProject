@@ -21,8 +21,8 @@ export function QuestionCard<TValue extends string>({
   onChange,
 }: Readonly<QuestionCardProps<TValue>>) {
   return (
-    <fieldset className="space-y-3 rounded-lg border border-zinc-200 bg-white p-4">
-      <legend className="px-1 text-base font-semibold text-zinc-950">
+    <fieldset className="space-y-3 rounded-lg border border-zinc-200 dark:border-white/5 bg-white dark:bg-[#18221f] p-4">
+      <legend className="px-1 text-base font-semibold text-zinc-950 dark:text-[#e7edeb]">
         {title}
       </legend>
       <div className="grid gap-2">

@@ -73,17 +73,17 @@ export function FeedbackForm({
       onSubmit={handleSubmit}
       className={
         embedded
-          ? "space-y-4 border-t border-zinc-100 pt-4"
-          : "space-y-4 rounded-lg border border-zinc-200 bg-white p-4"
+          ? "space-y-4 border-t border-zinc-100 dark:border-white/5 pt-4"
+          : "space-y-4 rounded-lg border border-zinc-200 dark:border-white/5 bg-white dark:bg-[#18221f] p-4"
       }
     >
       {hideTitle || embedded ? null : (
-        <h3 className="text-base font-semibold text-zinc-950">{title}</h3>
+        <h3 className="text-base font-semibold text-zinc-950 dark:text-[#e7edeb]">{title}</h3>
       )}
 
       <div className="space-y-2">
         <div className="flex items-center justify-between gap-3">
-          <span className="text-sm font-semibold text-zinc-800">
+          <span className="text-sm font-semibold text-zinc-800 dark:text-[#e7edeb]">
             {helpfulnessPrompt}
           </span>
           <div className="flex items-center gap-2">
@@ -99,8 +99,8 @@ export function FeedbackForm({
               }}
               className={`flex size-10 items-center justify-center rounded-md border transition-colors ${
                 hasHelpfulnessAnswer && wasHelpful === true
-                  ? "border-teal-700 bg-teal-50 text-teal-700"
-                  : "border-zinc-200 bg-white text-zinc-500 hover:bg-zinc-50"
+                  ? "border-teal-700 dark:border-teal-400/40 bg-teal-50 dark:bg-teal-950 text-teal-700 dark:text-teal-400"
+                  : "border-zinc-200 dark:border-white/5 bg-white dark:bg-[#18221f] text-zinc-500 dark:text-[#9fb0ad] hover:bg-zinc-50 dark:hover:bg-white/5"
               }`}
             >
               <ThumbsUp className="size-5" />
@@ -117,8 +117,8 @@ export function FeedbackForm({
               }}
               className={`flex size-10 items-center justify-center rounded-md border transition-colors ${
                 hasHelpfulnessAnswer && wasHelpful === false
-                  ? "border-red-300 bg-red-50 text-red-600"
-                  : "border-zinc-200 bg-white text-zinc-500 hover:bg-zinc-50"
+                  ? "border-red-300 bg-red-50 dark:bg-red-950/40 text-red-600 dark:text-red-400"
+                  : "border-zinc-200 dark:border-white/5 bg-white dark:bg-[#18221f] text-zinc-500 dark:text-[#9fb0ad] hover:bg-zinc-50 dark:hover:bg-white/5"
               }`}
             >
               <ThumbsDown className="size-5" />
@@ -126,7 +126,7 @@ export function FeedbackForm({
           </div>
         </div>
         {error ? (
-          <p id="feedback-helpfulness-error" className="text-sm text-red-700">
+          <p id="feedback-helpfulness-error" className="text-sm text-red-700 dark:text-red-400">
             {error}
           </p>
         ) : null}
@@ -135,7 +135,7 @@ export function FeedbackForm({
       {hasHelpfulnessAnswer ? (
         <>
           <label className="block space-y-2">
-            <span className="text-sm font-semibold text-zinc-800">
+            <span className="text-sm font-semibold text-zinc-800 dark:text-[#e7edeb]">
               Issue, if any
             </span>
             <select
@@ -143,7 +143,7 @@ export function FeedbackForm({
               onChange={(event) =>
                 setIssueType(event.target.value as FeedbackIssueType | "")
               }
-              className="h-11 w-full rounded-md border border-zinc-300 bg-white px-3 text-sm text-zinc-950 outline-none focus:border-teal-700"
+              className="h-11 w-full rounded-md border border-zinc-300 dark:border-white/10 bg-white dark:bg-[#18221f] px-3 text-sm text-zinc-950 dark:text-[#e7edeb] outline-none focus:border-teal-700 dark:focus:border-teal-400"
             >
               <option value=""></option>
               {issueOptions.map((option) => (
@@ -155,7 +155,7 @@ export function FeedbackForm({
           </label>
 
           <label className="block space-y-2">
-            <span className="text-sm font-semibold text-zinc-800">Comment</span>
+            <span className="text-sm font-semibold text-zinc-800 dark:text-[#e7edeb]">Comment</span>
             <textarea
               value={comment}
               onChange={(event) => {
@@ -164,7 +164,7 @@ export function FeedbackForm({
               }}
               rows={compact ? 3 : 4}
               placeholder="What should be improved?"
-              className="w-full resize-y rounded-md border border-zinc-300 bg-white px-3 py-2 text-sm leading-6 text-zinc-950 outline-none placeholder:text-zinc-400 focus:border-teal-700"
+              className="w-full resize-y rounded-md border border-zinc-300 dark:border-white/10 bg-white dark:bg-[#18221f] px-3 py-2 text-sm leading-6 text-zinc-950 dark:text-[#e7edeb] outline-none placeholder:text-zinc-400 dark:placeholder:text-[#7e908c] focus:border-teal-700 dark:focus:border-teal-400"
             />
           </label>
         </>
@@ -174,14 +174,14 @@ export function FeedbackForm({
         <button
           type="submit"
           disabled={!isHydrated}
-          className="h-11 w-full rounded-md bg-teal-700 px-4 text-sm font-semibold text-white transition-colors hover:bg-teal-800 disabled:cursor-not-allowed disabled:bg-zinc-300"
+          className="h-11 w-full rounded-md bg-teal-700 dark:bg-teal-400 dark:text-[#0f1a18] px-4 text-sm font-semibold text-white transition-colors hover:bg-teal-800 dark:hover:bg-teal-300 disabled:cursor-not-allowed disabled:bg-zinc-300 dark:disabled:bg-white/10"
         >
           Save feedback
         </button>
       ) : null}
 
       {saved ? (
-        <p className="text-sm font-medium text-teal-800">Feedback saved.</p>
+        <p className="text-sm font-medium text-teal-800 dark:text-teal-400">Feedback saved.</p>
       ) : null}
     </form>
   );

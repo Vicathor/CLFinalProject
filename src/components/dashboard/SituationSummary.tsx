@@ -49,15 +49,15 @@ export function SituationSummary({
   ];
 
   return (
-    <section className="space-y-3 rounded-lg border border-zinc-200 bg-white p-4">
+    <section className="space-y-3 rounded-lg border border-zinc-200 dark:border-white/5 bg-white dark:bg-[#18221f] p-4">
       <div className="flex items-center justify-between">
-        <h3 className="text-base font-semibold text-zinc-950">
+        <h3 className="text-base font-semibold text-zinc-950 dark:text-[#e7edeb]">
           Your situation
         </h3>
         <Link
           href="/onboarding"
           aria-label="Edit your answers"
-          className="flex items-center gap-1 rounded-md px-2 py-1 text-sm font-medium text-teal-700 transition-colors hover:bg-teal-50"
+          className="flex items-center gap-1 rounded-md px-2 py-1 text-sm font-medium text-teal-700 dark:text-teal-400 transition-colors hover:bg-teal-50 dark:hover:bg-teal-400/10"
         >
           <Pencil className="size-4" />
           Edit
@@ -67,7 +67,7 @@ export function SituationSummary({
         {items.map((item) => (
           <span
             key={item}
-            className="rounded-md bg-zinc-100 px-3 py-2 text-sm font-medium text-zinc-700"
+            className="rounded-md bg-zinc-100 dark:bg-white/5 px-3 py-2 text-sm font-medium text-zinc-700 dark:text-[#9fb0ad]"
           >
             {item}
           </span>

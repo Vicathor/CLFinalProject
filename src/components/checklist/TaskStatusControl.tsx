@@ -39,8 +39,8 @@ export function TaskStatusControl({
             className={cn(
               "min-h-11 rounded-md border px-2 py-2 text-xs font-semibold leading-4 transition-colors",
               isSelected
-                ? "border-teal-700 bg-teal-700 text-white"
-                : "border-zinc-200 bg-white text-zinc-700 hover:border-teal-700 hover:bg-teal-50",
+                ? "border-teal-700 dark:border-teal-400/40 bg-teal-700 dark:bg-teal-400 dark:text-[#0f1a18] text-white"
+                : "border-zinc-200 dark:border-white/5 bg-white dark:bg-[#18221f] text-zinc-700 dark:text-[#9fb0ad] hover:border-teal-700 dark:hover:border-teal-400/50 hover:bg-teal-50 dark:hover:bg-teal-400/10",
             )}
           >
             {option.label}

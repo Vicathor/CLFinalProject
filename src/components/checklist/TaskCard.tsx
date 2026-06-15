@@ -23,10 +23,10 @@ const priorityLabels: Record<PersonalisedTask["urgency"], string> = {
 };
 
 const priorityStyles: Record<PersonalisedTask["urgency"], string> = {
-  urgent: "bg-red-100 text-red-800",
-  important: "bg-amber-100 text-amber-900",
-  normal: "bg-zinc-100 text-zinc-700",
-  later: "bg-zinc-100 text-zinc-500",
+  urgent: "bg-red-100 dark:bg-red-950 text-red-800 dark:text-red-300",
+  important: "bg-amber-100 dark:bg-amber-950 text-amber-900 dark:text-amber-300",
+  normal: "bg-zinc-100 dark:bg-white/5 text-zinc-700 dark:text-[#9fb0ad]",
+  later: "bg-zinc-100 dark:bg-white/5 text-zinc-500 dark:text-[#9fb0ad]",
 };
 
 export function TaskCard({
@@ -41,7 +41,7 @@ export function TaskCard({
     <article
       className={cn(
         "rounded-lg border p-4 transition-colors duration-300",
-        isCollapsed ? "border-zinc-200 bg-zinc-50" : "border-zinc-200 bg-white",
+        isCollapsed ? "border-zinc-200 dark:border-white/5 bg-zinc-50 dark:bg-white/5" : "border-zinc-200 dark:border-white/5 bg-white dark:bg-[#18221f]",
       )}
     >
       {/* Header row — always visible */}
@@ -53,7 +53,7 @@ export function TaskCard({
               aria-pressed="true"
               aria-label={`Reopen "${task.title}"`}
               onClick={() => onStatusChange(task.id, "not_started")}
-              className="mt-0.5 flex size-5 shrink-0 items-center justify-center rounded-full bg-teal-700 text-white transition-colors hover:bg-teal-800"
+              className="mt-0.5 flex size-5 shrink-0 items-center justify-center rounded-full bg-teal-700 dark:bg-teal-400 dark:text-[#0f1a18] text-white transition-colors hover:bg-teal-800 dark:hover:bg-teal-300"
             >
               <Check className="size-3.5" strokeWidth={3} />
             </button>
@@ -62,8 +62,8 @@ export function TaskCard({
             className={cn(
               "min-w-0 text-base font-semibold leading-6",
               isCollapsed
-                ? "truncate text-zinc-500 line-through"
-                : "text-zinc-950",
+                ? "truncate text-zinc-500 dark:text-[#9fb0ad] line-through"
+                : "text-zinc-950 dark:text-[#e7edeb]",
             )}
           >
             {task.title}
@@ -73,7 +73,7 @@ export function TaskCard({
           className={cn(
             "shrink-0 rounded-md px-2 py-1 text-xs font-semibold",
             isCollapsed
-              ? "text-zinc-400"
+              ? "text-zinc-400 dark:text-[#7e908c]"
               : priorityStyles[task.urgency],
           )}
         >
@@ -92,9 +92,9 @@ export function TaskCard({
       >
         <div className="overflow-hidden">
           <div className="space-y-4 pt-3">
-            <p className="text-sm leading-6 text-zinc-600">{task.summary}</p>
+            <p className="text-sm leading-6 text-zinc-600 dark:text-[#9fb0ad]">{task.summary}</p>
             {task.applicability === "maybe_applicable" ? (
-              <p className="rounded-md bg-amber-50 px-3 py-2 text-sm font-medium text-amber-900">
+              <p className="rounded-md bg-amber-50 dark:bg-amber-950/40 px-3 py-2 text-sm font-medium text-amber-900 dark:text-amber-300">
                 Maybe applicable based on your answers
               </p>
             ) : null}
@@ -105,7 +105,7 @@ export function TaskCard({
             />
             <Link
               href={`/checklist/${task.id}`}
-              className="flex h-11 w-full items-center justify-center rounded-md border border-zinc-200 bg-white px-3 text-sm font-semibold text-zinc-700 transition-colors hover:bg-zinc-100"
+              className="flex h-11 w-full items-center justify-center rounded-md border border-zinc-200 dark:border-white/5 bg-white dark:bg-[#18221f] px-3 text-sm font-semibold text-zinc-700 dark:text-[#9fb0ad] transition-colors hover:bg-zinc-100 dark:hover:bg-white/10"
             >
               View guide
             </Link>

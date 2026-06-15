@@ -173,7 +173,7 @@ export function OnboardingForm() {
             key={segment.key}
             className={cn(
               "h-1.5 flex-1 rounded-full transition-colors",
-              index <= stepIndex ? "bg-teal-700" : "bg-zinc-200",
+              index <= stepIndex ? "bg-teal-700 dark:bg-teal-400 dark:text-[#0f1a18]" : "bg-zinc-200 dark:bg-white/10",
             )}
           />
         ))}
@@ -198,13 +198,13 @@ export function OnboardingForm() {
 
         {/* Content */}
         <div className="flex flex-1 flex-col px-5 pb-[calc(env(safe-area-inset-bottom)+1.5rem)] pt-2">
-        <p className="text-xs font-semibold uppercase tracking-wide text-teal-700">
+        <p className="text-xs font-semibold uppercase tracking-wide text-teal-700 dark:text-teal-400">
           Step {stepIndex + 1} of {steps.length}
         </p>
-        <h2 className="mt-1 text-2xl font-semibold leading-tight text-zinc-950">
+        <h2 className="mt-1 text-2xl font-semibold leading-tight text-zinc-950 dark:text-[#e7edeb]">
           {step.title}
         </h2>
-        <p className="mt-2 text-sm leading-6 text-zinc-600">{step.subtitle}</p>
+        <p className="mt-2 text-sm leading-6 text-zinc-600 dark:text-[#9fb0ad]">{step.subtitle}</p>
 
         <div className="mt-5 grid gap-3">
           {step.options.map((option) => (
@@ -212,7 +212,7 @@ export function OnboardingForm() {
               key={option.value}
               type="button"
               onClick={() => selectOption(option.value)}
-              className="group flex min-h-13 w-full items-center justify-between gap-3 rounded-full border border-zinc-200 bg-white px-5 py-3 text-left text-sm font-medium text-zinc-800 shadow-sm transition-all hover:border-teal-300 hover:bg-teal-50"
+              className="group flex min-h-13 w-full items-center justify-between gap-3 rounded-full border border-zinc-200 dark:border-white/5 bg-white dark:bg-[#18221f] px-5 py-3 text-left text-sm font-medium text-zinc-800 dark:text-[#e7edeb] shadow-sm transition-all hover:border-teal-300 hover:bg-teal-50 dark:hover:bg-teal-400/10"
             >
               <span>{option.label}</span>
               <ChevronRight className="size-5 shrink-0 text-zinc-300 transition-colors group-hover:text-teal-600" />
@@ -221,7 +221,7 @@ export function OnboardingForm() {
         </div>
 
         {isHydrated && !storageAvailable ? (
-          <p className="mt-4 text-sm leading-6 text-red-700">
+          <p className="mt-4 text-sm leading-6 text-red-700 dark:text-red-400">
             Local browser storage is unavailable, so your answers may not persist
             after reload.
           </p>
@@ -232,7 +232,7 @@ export function OnboardingForm() {
             <button
               type="button"
               onClick={goBack}
-              className="-ml-2 flex items-center gap-1 rounded-md px-2 py-1 text-sm font-medium text-zinc-400 transition-colors hover:text-zinc-700"
+              className="-ml-2 flex items-center gap-1 rounded-md px-2 py-1 text-sm font-medium text-zinc-400 dark:text-[#7e908c] transition-colors hover:text-zinc-700 dark:hover:text-[#e7edeb]"
             >
               <ChevronLeft className="size-4" />
               Back

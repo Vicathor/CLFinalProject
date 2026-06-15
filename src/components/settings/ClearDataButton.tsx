@@ -19,7 +19,7 @@ export function ClearDataButton() {
     <button
       type="button"
       onClick={handleClear}
-      className="h-11 w-full rounded-md text-sm font-semibold text-red-600 transition-colors hover:bg-red-50"
+      className="h-11 w-full rounded-md text-sm font-semibold text-red-600 dark:text-red-400 transition-colors hover:bg-red-50 dark:hover:bg-red-950/40"
     >
       Clear local data
     </button>

@@ -35,10 +35,10 @@ const priorityLabels: Record<PersonalisedTask["urgency"], string> = {
 };
 
 const priorityStyles: Record<PersonalisedTask["urgency"], string> = {
-  urgent: "bg-red-100 text-red-800",
-  important: "bg-amber-100 text-amber-900",
-  normal: "bg-zinc-100 text-zinc-700",
-  later: "bg-zinc-100 text-zinc-500",
+  urgent: "bg-red-100 dark:bg-red-950 text-red-800 dark:text-red-300",
+  important: "bg-amber-100 dark:bg-amber-950 text-amber-900 dark:text-amber-300",
+  normal: "bg-zinc-100 dark:bg-white/5 text-zinc-700 dark:text-[#9fb0ad]",
+  later: "bg-zinc-100 dark:bg-white/5 text-zinc-500 dark:text-[#9fb0ad]",
 };
 
 function getPersonalisedTask(
@@ -78,13 +78,13 @@ export function TaskGuide({ task }: Readonly<TaskGuideProps>) {
       <div className="space-y-3">
         <Link
           href="/checklist"
-          className="text-sm font-semibold text-teal-800 underline decoration-2 underline-offset-4"
+          className="text-sm font-semibold text-teal-800 dark:text-teal-400 underline decoration-2 underline-offset-4"
         >
           Back to checklist
         </Link>
         <div>
           <div className="flex items-start justify-between gap-3">
-            <h2 className="text-3xl font-semibold leading-tight text-zinc-950">
+            <h2 className="text-3xl font-semibold leading-tight text-zinc-950 dark:text-[#e7edeb]">
               {task.title}
             </h2>
             <span
@@ -93,19 +93,19 @@ export function TaskGuide({ task }: Readonly<TaskGuideProps>) {
               {priorityLabels[personalisedTask.urgency]}
             </span>
           </div>
-          <p className="mt-3 text-sm font-medium text-zinc-500">
+          <p className="mt-3 text-sm font-medium text-zinc-500 dark:text-[#9fb0ad]">
             {task.appliesToLabel}
           </p>
           {personalisedTask.applicability === "maybe_applicable" ? (
-            <p className="mt-3 rounded-md bg-amber-50 px-3 py-2 text-sm font-medium text-amber-900">
+            <p className="mt-3 rounded-md bg-amber-50 dark:bg-amber-950/40 px-3 py-2 text-sm font-medium text-amber-900 dark:text-amber-300">
               Maybe applicable based on your answers
             </p>
           ) : null}
         </div>
       </div>
 
-      <section className="space-y-3 rounded-lg border border-zinc-200 bg-white p-4">
-        <h3 className="text-base font-semibold text-zinc-950">Status</h3>
+      <section className="space-y-3 rounded-lg border border-zinc-200 dark:border-white/5 bg-white dark:bg-[#18221f] p-4">
+        <h3 className="text-base font-semibold text-zinc-950 dark:text-[#e7edeb]">Status</h3>
         <TaskStatusControl
           taskId={task.id}
           status={taskProgress[task.id]?.status}
@@ -113,23 +113,23 @@ export function TaskGuide({ task }: Readonly<TaskGuideProps>) {
         />
       </section>
 
-      <section className="space-y-3 rounded-lg border border-zinc-200 bg-white p-4">
-        <h3 className="text-base font-semibold text-zinc-950">What this is</h3>
-        <p className="text-sm leading-6 text-zinc-600">{task.whatThisIs}</p>
+      <section className="space-y-3 rounded-lg border border-zinc-200 dark:border-white/5 bg-white dark:bg-[#18221f] p-4">
+        <h3 className="text-base font-semibold text-zinc-950 dark:text-[#e7edeb]">What this is</h3>
+        <p className="text-sm leading-6 text-zinc-600 dark:text-[#9fb0ad]">{task.whatThisIs}</p>
       </section>
 
-      <section className="space-y-3 rounded-lg border border-zinc-200 bg-white p-4">
-        <h3 className="text-base font-semibold text-zinc-950">
+      <section className="space-y-3 rounded-lg border border-zinc-200 dark:border-white/5 bg-white dark:bg-[#18221f] p-4">
+        <h3 className="text-base font-semibold text-zinc-950 dark:text-[#e7edeb]">
           Why it matters
         </h3>
-        <p className="text-sm leading-6 text-zinc-600">{task.whyItMatters}</p>
+        <p className="text-sm leading-6 text-zinc-600 dark:text-[#9fb0ad]">{task.whyItMatters}</p>
       </section>
 
-      <section className="space-y-3 rounded-lg border border-zinc-200 bg-white p-4">
-        <h3 className="text-base font-semibold text-zinc-950">
+      <section className="space-y-3 rounded-lg border border-zinc-200 dark:border-white/5 bg-white dark:bg-[#18221f] p-4">
+        <h3 className="text-base font-semibold text-zinc-950 dark:text-[#e7edeb]">
           What to do next
         </h3>
-        <ol className="list-decimal space-y-2 pl-5 text-sm leading-6 text-zinc-600">
+        <ol className="list-decimal space-y-2 pl-5 text-sm leading-6 text-zinc-600 dark:text-[#9fb0ad]">
           {task.nextSteps.map((step) => (
             <li key={step}>{step}</li>
           ))}
@@ -137,7 +137,7 @@ export function TaskGuide({ task }: Readonly<TaskGuideProps>) {
       </section>
 
       <section className="space-y-3">
-        <h3 className="text-base font-semibold text-zinc-950">
+        <h3 className="text-base font-semibold text-zinc-950 dark:text-[#e7edeb]">
           Official sources
         </h3>
         <div className="grid gap-3">
@@ -148,7 +148,7 @@ export function TaskGuide({ task }: Readonly<TaskGuideProps>) {
       </section>
 
       <section className="space-y-3">
-        <h3 className="text-base font-semibold text-zinc-950">Student tips</h3>
+        <h3 className="text-base font-semibold text-zinc-950 dark:text-[#e7edeb]">Student tips</h3>
         <div className="grid gap-3">
           {studentTips.map((tip) => (
             <StudentTipCard key={tip.id} tip={tip} />
@@ -158,8 +158,8 @@ export function TaskGuide({ task }: Readonly<TaskGuideProps>) {
 
       <AskGuidanceBlock contacts={askContacts} />
 
-      <section className="space-y-3 rounded-lg border border-zinc-200 bg-white p-4">
-        <h3 className="text-base font-semibold text-zinc-950">
+      <section className="space-y-3 rounded-lg border border-zinc-200 dark:border-white/5 bg-white dark:bg-[#18221f] p-4">
+        <h3 className="text-base font-semibold text-zinc-950 dark:text-[#e7edeb]">
           Related tasks
         </h3>
         <div className="grid gap-2">
@@ -167,7 +167,7 @@ export function TaskGuide({ task }: Readonly<TaskGuideProps>) {
             <Link
               key={relatedTask.id}
               href={`/checklist/${relatedTask.id}`}
-              className="rounded-md bg-zinc-50 px-3 py-2 text-sm font-semibold text-zinc-800 transition-colors hover:bg-zinc-100"
+              className="rounded-md bg-zinc-50 dark:bg-white/5 px-3 py-2 text-sm font-semibold text-zinc-800 dark:text-[#e7edeb] transition-colors hover:bg-zinc-100 dark:hover:bg-white/10"
             >
               {relatedTask.title}
             </Link>

@@ -25,8 +25,8 @@ export function PhaseSection({
   return (
     <section className="space-y-3">
       <div className="flex items-center justify-between gap-3">
-        <h3 className="text-lg font-semibold text-zinc-950">{title}</h3>
-        <span className="text-sm font-medium text-zinc-500">
+        <h3 className="text-lg font-semibold text-zinc-950 dark:text-[#e7edeb]">{title}</h3>
+        <span className="text-sm font-medium text-zinc-500 dark:text-[#9fb0ad]">
           {tasks.length}
         </span>
       </div>

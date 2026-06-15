@@ -12,10 +12,10 @@ export function ProgressBar({ percentage }: Readonly<ProgressBarProps>) {
       aria-valuemin={0}
       aria-valuenow={boundedPercentage}
       role="progressbar"
-      className="h-3 overflow-hidden rounded-full bg-zinc-200"
+      className="h-3 overflow-hidden rounded-full bg-zinc-200 dark:bg-white/10"
     >
       <div
-        className="h-full rounded-full bg-teal-700 transition-[width]"
+        className="h-full rounded-full bg-teal-700 dark:bg-teal-400 dark:text-[#0f1a18] transition-[width]"
         style={{ width: `${boundedPercentage}%` }}
       />
     </div>

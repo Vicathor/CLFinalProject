@@ -29,12 +29,12 @@ export function DashboardClient() {
     return (
       <section className="space-y-5">
         <div>
-          <h2 className="mt-2 text-3xl font-semibold leading-tight text-zinc-950">
+          <h2 className="mt-2 text-3xl font-semibold leading-tight text-zinc-950 dark:text-[#e7edeb]">
             Dashboard
           </h2>
         </div>
-        <div className="h-32 rounded-lg bg-zinc-100" />
-        <div className="h-48 rounded-lg bg-zinc-100" />
+        <div className="h-32 rounded-lg bg-zinc-100 dark:bg-white/5" />
+        <div className="h-48 rounded-lg bg-zinc-100 dark:bg-white/5" />
       </section>
     );
   }
@@ -43,21 +43,21 @@ export function DashboardClient() {
     return (
       <section className="space-y-5">
         <div>
-          <h2 className="mt-2 text-3xl font-semibold leading-tight text-zinc-950">
+          <h2 className="mt-2 text-3xl font-semibold leading-tight text-zinc-950 dark:text-[#e7edeb]">
             Dashboard
           </h2>
         </div>
-        <div className="space-y-4 rounded-lg border border-zinc-200 bg-white p-4">
-          <h3 className="text-base font-semibold text-zinc-950">
+        <div className="space-y-4 rounded-lg border border-zinc-200 dark:border-white/5 bg-white dark:bg-[#18221f] p-4">
+          <h3 className="text-base font-semibold text-zinc-950 dark:text-[#e7edeb]">
             Start with your situation
           </h3>
-          <p className="text-sm leading-6 text-zinc-600">
+          <p className="text-sm leading-6 text-zinc-600 dark:text-[#9fb0ad]">
             Answer five quick questions so the dashboard can prioritise urgent
             tasks and next actions.
           </p>
           <Link
             href="/onboarding"
-            className="flex h-12 w-full items-center justify-center rounded-md bg-teal-700 px-4 text-sm font-semibold text-white transition-colors hover:bg-teal-800"
+            className="flex h-12 w-full items-center justify-center rounded-md bg-teal-700 dark:bg-teal-400 dark:text-[#0f1a18] px-4 text-sm font-semibold text-white transition-colors hover:bg-teal-800 dark:hover:bg-teal-300"
           >
             Start onboarding
           </Link>
@@ -69,15 +69,15 @@ export function DashboardClient() {
   return (
     <section className="space-y-5">
       <div>
-        <h2 className="mt-2 text-3xl font-semibold leading-tight text-zinc-950">
+        <h2 className="mt-2 text-3xl font-semibold leading-tight text-zinc-950 dark:text-[#e7edeb]">
           Dashboard
         </h2>
       </div>
 
       {isHousingUnresolved(profile.housingStatus) ? (
-        <div className="rounded-lg border border-red-200 bg-red-50 p-4">
-          <p className="font-semibold text-red-900">Housing needs attention</p>
-          <p className="mt-1 text-sm leading-6 text-red-800">
+        <div className="rounded-lg border border-red-200 dark:border-red-900/50 bg-red-50 dark:bg-red-950/40 p-4">
+          <p className="font-semibold text-red-900 dark:text-red-200">Housing needs attention</p>
+          <p className="mt-1 text-sm leading-6 text-red-800 dark:text-red-300">
             Your housing is not fully resolved, so Housing SOS is treated as an
             urgent task.
           </p>

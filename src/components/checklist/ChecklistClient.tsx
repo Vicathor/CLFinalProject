@@ -44,12 +44,12 @@ export function ChecklistClient() {
     return (
       <section className="space-y-5">
         <div>
-          <h2 className="mt-2 text-3xl font-semibold leading-tight text-zinc-950">
+          <h2 className="mt-2 text-3xl font-semibold leading-tight text-zinc-950 dark:text-[#e7edeb]">
             Checklist
           </h2>
         </div>
-        <div className="h-40 rounded-lg bg-zinc-100" />
-        <div className="h-40 rounded-lg bg-zinc-100" />
+        <div className="h-40 rounded-lg bg-zinc-100 dark:bg-white/5" />
+        <div className="h-40 rounded-lg bg-zinc-100 dark:bg-white/5" />
       </section>
     );
   }
@@ -58,21 +58,21 @@ export function ChecklistClient() {
     return (
       <section className="space-y-5">
         <div>
-          <h2 className="mt-2 text-3xl font-semibold leading-tight text-zinc-950">
+          <h2 className="mt-2 text-3xl font-semibold leading-tight text-zinc-950 dark:text-[#e7edeb]">
             Checklist
           </h2>
         </div>
-        <div className="space-y-4 rounded-lg border border-zinc-200 bg-white p-4">
-          <h3 className="text-base font-semibold text-zinc-950">
+        <div className="space-y-4 rounded-lg border border-zinc-200 dark:border-white/5 bg-white dark:bg-[#18221f] p-4">
+          <h3 className="text-base font-semibold text-zinc-950 dark:text-[#e7edeb]">
             Personalise your checklist
           </h3>
-          <p className="text-sm leading-6 text-zinc-600">
+          <p className="text-sm leading-6 text-zinc-600 dark:text-[#9fb0ad]">
             Complete onboarding first so the checklist can rank tasks around
             your housing, arrival, BSN, work, and residency situation.
           </p>
           <Link
             href="/onboarding"
-            className="flex h-12 w-full items-center justify-center rounded-md bg-teal-700 px-4 text-sm font-semibold text-white transition-colors hover:bg-teal-800"
+            className="flex h-12 w-full items-center justify-center rounded-md bg-teal-700 dark:bg-teal-400 dark:text-[#0f1a18] px-4 text-sm font-semibold text-white transition-colors hover:bg-teal-800 dark:hover:bg-teal-300"
           >
             Start onboarding
           </Link>
@@ -84,10 +84,10 @@ export function ChecklistClient() {
   return (
     <section className="space-y-6">
       <div>
-        <h2 className="mt-2 text-3xl font-semibold leading-tight text-zinc-950">
+        <h2 className="mt-2 text-3xl font-semibold leading-tight text-zinc-950 dark:text-[#e7edeb]">
           Checklist
         </h2>
-        <p className="mt-3 text-base leading-7 text-zinc-600">
+        <p className="mt-3 text-base leading-7 text-zinc-600 dark:text-[#9fb0ad]">
           Tasks are grouped by timing and ranked with your onboarding answers.
         </p>
       </div>
