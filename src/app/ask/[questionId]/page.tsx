@@ -1,5 +1,5 @@
 import { AskThreadDetail } from "@/components/ask/AskThreadDetail";
-import { getSeedThreads, getThreadById } from "@/lib/ask";
+import { getOfficialThreads } from "@/lib/ask";
 
 type AskThreadPageProps = {
   params: Promise<{
@@ -7,8 +7,9 @@ type AskThreadPageProps = {
   }>;
 };
 
+// Pre-generate official FAQ pages only; community question pages are dynamic.
 export function generateStaticParams() {
-  return getSeedThreads().map((thread) => ({
+  return getOfficialThreads().map((thread) => ({
     questionId: thread.id,
   }));
 }
@@ -17,9 +18,8 @@ export default async function AskThreadPage({
   params,
 }: Readonly<AskThreadPageProps>) {
   const { questionId } = await params;
-  // User-created questions live only in the browser, so the seed lookup may
-  // miss; the client component resolves those from local storage.
-  const seedThread = getThreadById(questionId) ?? null;
+  const officialThread =
+    getOfficialThreads().find((t) => t.id === questionId) ?? null;
 
-  return <AskThreadDetail questionId={questionId} seedThread={seedThread} />;
+  return <AskThreadDetail questionId={questionId} seedThread={officialThread} />;
 }

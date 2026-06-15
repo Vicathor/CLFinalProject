@@ -166,17 +166,29 @@ export function OnboardingForm() {
 
   return (
     <div className="-mx-5 -mt-6 flex min-h-[calc(100dvh-73px)] flex-col">
-      {/* Progress segments */}
-      <div className="flex gap-1.5 px-5 pt-4">
-        {steps.map((segment, index) => (
-          <span
-            key={segment.key}
-            className={cn(
-              "h-1.5 flex-1 rounded-full transition-colors",
-              index <= stepIndex ? "bg-teal-700 dark:bg-teal-400 dark:text-[#0f1a18]" : "bg-zinc-200 dark:bg-white/10",
-            )}
+      {/* Progress bar */}
+      <div className="px-5 pt-5">
+        <div className="relative h-3 rounded-full bg-zinc-200 dark:bg-white/10">
+          <div
+            className="absolute inset-y-0 left-0 rounded-full bg-teal-700 dark:bg-teal-400 transition-[width] duration-500 ease-out"
+            style={{
+              width:
+                stepIndex === steps.length - 1
+                  ? "100%"
+                  : `calc(${((stepIndex + 1) / steps.length) * 100}% + 6px)`,
+            }}
           />
-        ))}
+          {steps.slice(0, -1).map((segment, index) => (
+            <span
+              key={segment.key}
+              className={cn(
+                "absolute top-1/2 size-1 -translate-x-1/2 -translate-y-1/2 rounded-full transition-colors duration-300",
+                index <= stepIndex ? "bg-white" : "bg-zinc-400 dark:bg-white/30",
+              )}
+              style={{ left: `${((index + 1) / steps.length) * 100}%` }}
+            />
+          ))}
+        </div>
       </div>
 
       {/* Animated step: hero + content transition in together as one unit,

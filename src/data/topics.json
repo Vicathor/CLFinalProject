@@ -73,14 +73,26 @@
   },
   {
     "id": "transport_daily_life",
-    "title": "Transport and daily life",
-    "summary": "Set up practical mobility, phone access, and daily-life basics.",
-    "body": "Public transport, biking, phone access, and backup payment options make the first weeks easier. Check routes before appointments and budget for bike essentials if you plan to cycle.",
+    "title": "Transport and commuting",
+    "summary": "Get around Enschede by bike or public transport, and set up a Dutch phone number.",
+    "body": "Enschede is a bike-friendly city and most students cycle daily. Budget for a bike, lock, lights, and rain gear — these are essentials, not extras. Public transport runs on OV-chipkaart or contactless bank card payment; check 9292.nl for routes and connections before appointments.\n\nA Dutch or reliable EU phone number helps with two-factor authentication, housing viewings, delivery services, and government letters. Prepaid SIMs are widely available and do not require a BSN.",
     "relatedTaskIds": ["transport_bike_daily_life", "dutch_phone_number", "money_bank_account", "plan_arrival"],
     "officialSourceIds": ["nine_two_nine_two_public_transport", "ovpay", "acm_mobile_roaming", "gov_112_mobile"],
     "studentTipIds": ["tip_bike_rain", "tip_phone_2fa", "tip_arrival_buffer"],
     "askContactIds": ["public_transport_operator", "telecom_provider", "student_services"],
     "faqIds": ["faq_transport_payment", "faq_phone_number"],
-    "tags": ["transport", "phone", "daily-life"]
+    "tags": ["transport", "phone", "commuting"]
+  },
+  {
+    "id": "daily_life",
+    "title": "Daily life",
+    "summary": "Find food, explore Enschede, and settle into everyday student life.",
+    "body": "Groceries and markets\nEnschede has a good mix of supermarkets. Albert Heijn and Jumbo have the widest product ranges. Lidl and Aldi are significantly cheaper for staples and worth the trip. An outdoor market runs on Tuesdays and Saturdays in the city centre with fresh produce, bread, and cheese.\n\nShopping and household basics\nThe city centre has most mainstream clothing and household chains. Action is good and affordably priced for household items, kitchen items, and small appliances. Primark near Enschede Centraal is good for cheap clothing. Kringloop (thrift) shops around the city sell second-hand furniture and kitchenware at very low prices — ideal for furnishing a room. Marktplaats (marktplaats.nl) is the Dutch equivalent of Craigslist and a great place to find second-hand furniture, bikes, and appliances locally.\n\nDining and eating out\nThe UT campus has student restaurants with affordable hot meals during term time. Enschede city centre has a wide range of international restaurants, falafel and kebab spots, Asian takeaways, and Dutch snack bars. The Orbit ITC guide below lists stores and dining options by category and is especially useful in your first weeks.",
+    "relatedTaskIds": ["plan_arrival"],
+    "officialSourceIds": ["orbit_enschede_guide", "visit_enschede"],
+    "studentTipIds": ["tip_supermarket_options", "tip_kringloop_secondhand"],
+    "askContactIds": ["student_services"],
+    "faqIds": [],
+    "tags": ["daily-life", "groceries", "shopping", "dining"]
   }
 ]

@@ -50,8 +50,8 @@
   {
     "id": "gov_brp_registration",
     "title": "Government.nl: Register with the Personal Records Database",
-    "url": "https://www.government.nl/documents/questions-and-answers/when-should-i-register-with-the-personal-records-database-as-a-resident",
-    "lastChecked": "2026-06-07"
+    "url": "https://www.government.nl/faq/when-should-i-register-with-the-personal-records-database-as-a-resident",
+    "lastChecked": "2026-06-15"
   },
   {
     "id": "gov_bsn",
@@ -118,5 +118,17 @@
     "title": "Dutch Payments Association: IBANs",
     "url": "https://www.betaalvereniging.nl/en/knowledge-base/iban-and-bic/ibans/?noredirect=en-GB",
     "lastChecked": "2026-06-07"
+  },
+  {
+    "id": "orbit_enschede_guide",
+    "title": "Orbit ITC: Enschede Stores & Daily Life Guide",
+    "url": "https://orbit-itc.github.io/2026/stores.html",
+    "lastChecked": "2026-06-15"
+  },
+  {
+    "id": "visit_enschede",
+    "title": "Visit Enschede: Discover Enschede",
+    "url": "https://www.visit-enschede.com/discover-enschede",
+    "lastChecked": "2026-06-15"
   }
 ]

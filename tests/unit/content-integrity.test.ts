@@ -40,6 +40,7 @@ const expectedTopicIds = [
   "money_banking",
   "healthcare_gp",
   "transport_daily_life",
+  "daily_life",
 ] as const satisfies readonly TopicId[];
 
 const typedTasks = tasks as Task[];

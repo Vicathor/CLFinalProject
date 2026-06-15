@@ -5,6 +5,7 @@ import { useState } from "react";
 import type { FormEvent } from "react";
 
 import { useAppState } from "@/hooks/useAppState";
+import { supabase } from "@/lib/supabase/client";
 import type {
   FeedbackIssueType,
   FeedbackSourceType,
@@ -38,7 +39,7 @@ export function FeedbackForm({
   hideTitle = false,
   embedded = false,
 }: Readonly<FeedbackFormProps>) {
-  const { saveFeedback, isHydrated } = useAppState();
+  const { saveFeedback, isHydrated, profile } = useAppState();
   const [wasHelpful, setWasHelpful] = useState<boolean | null>(null);
   const [hasHelpfulnessAnswer, setHasHelpfulnessAnswer] = useState(false);
   const [issueType, setIssueType] = useState<FeedbackIssueType | "">("");
@@ -61,6 +62,15 @@ export function FeedbackForm({
       issueType: issueType || undefined,
       comment: comment.trim() || undefined,
     });
+
+    supabase.from("feedback").insert({
+      source_type: sourceType,
+      source_id: sourceId ?? null,
+      was_helpful: wasHelpful,
+      issue_type: (issueType || null) as FeedbackIssueType | null,
+      comment: comment.trim() || null,
+      profile_snapshot: profile ?? null,
+    }).then(() => {});
 
     setIssueType("");
     setComment("");

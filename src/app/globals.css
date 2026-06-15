@@ -19,6 +19,7 @@ html.dark {
 html {
   background: #e8edf0;
   -webkit-text-size-adjust: 100%;
+  overflow-y: scroll;
 }
 
 body {

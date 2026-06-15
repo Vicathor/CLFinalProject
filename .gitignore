@@ -8,3 +8,5 @@ coverage
 .env*.local
 *.tsbuildinfo
 Interview Transcripts 2/
+CLAUDE.md
+contextmemory.md

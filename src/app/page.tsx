@@ -11,8 +11,12 @@ import {
   Sun,
 } from "lucide-react";
 import Link from "next/link";
+import { useRouter } from "next/navigation";
+import { useEffect, useState } from "react";
 
+import { LoginSheet } from "@/components/ask/LoginSheet";
 import { useAppState } from "@/hooks/useAppState";
+import { useAuth } from "@/hooks/useAuth";
 
 const features: { icon: LucideIcon; title: string; description: string }[] = [
   {
@@ -33,13 +37,24 @@ const features: { icon: LucideIcon; title: string; description: string }[] = [
 ];
 
 export default function Home() {
-  const { profile, isHydrated, clearAllLocalData, theme, setTheme } =
-    useAppState();
+  const { profile, isHydrated, theme, setTheme } = useAppState();
+  const { user } = useAuth();
+  const router = useRouter();
+  const [showLogin, setShowLogin] = useState(false);
+  const [loginInitiated, setLoginInitiated] = useState(false);
   const hasProfile = Boolean(profile);
   const isDark = theme === "dark";
 
+  useEffect(() => {
+    if (loginInitiated && user && hasProfile) {
+      router.push("/dashboard");
+    }
+  }, [loginInitiated, user, hasProfile, router]);
+
   return (
-    <div className="animate-screen-in -mx-5 -mt-6">
+    <>
+      <LoginSheet isOpen={showLogin} onClose={() => setShowLogin(false)} />
+      <div className="animate-screen-in -mx-5 -mt-6">
       {/* Hero */}
       <div className="relative overflow-hidden bg-teal-700 px-6 pb-16 pt-12 text-white">
         <div className="relative">
@@ -98,22 +113,10 @@ export default function Home() {
                 {hasProfile ? "Continue to dashboard" : "Get started"}
                 <ArrowRight className="size-5" />
               </Link>
-              {hasProfile ? (
-                <button
-                  type="button"
-                  onClick={clearAllLocalData}
-                  className="h-11 w-full rounded-full text-sm font-medium text-zinc-400 transition-colors hover:text-zinc-700 dark:text-[#9fb0ad] dark:hover:text-[#e7edeb]"
-                >
-                  Clear local data
-                </button>
-              ) : null}
             </>
           )}
         </div>
 
-        <p className="pt-5 text-center text-xs text-zinc-400 dark:text-[#7e908c]">
-          Your progress is saved only in this browser.
-        </p>
 
         <div className="mt-7 flex justify-center">
           <button
@@ -126,7 +129,21 @@ export default function Home() {
             {isDark ? "Light mode" : "Dark mode"}
           </button>
         </div>
+
+        {!user && isHydrated ? (
+          <p className="mt-6 text-center text-xs text-zinc-400 dark:text-[#7e908c]">
+            Returning user?{" "}
+            <button
+              type="button"
+              onClick={() => { setLoginInitiated(true); setShowLogin(true); }}
+              className="font-semibold text-teal-700 underline-offset-2 hover:underline dark:text-teal-400"
+            >
+              Log in here
+            </button>
+          </p>
+        ) : null}
       </div>
     </div>
+    </>
   );
 }
