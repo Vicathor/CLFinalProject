@@ -8,10 +8,18 @@ import type { AskAnswer } from "@/types/ask";
 
 type AnswerCardProps = {
   answer: AskAnswer;
+  initialReported: boolean;
+  onReport: () => Promise<boolean>;
 };
 
-export function AnswerCard({ answer }: Readonly<AnswerCardProps>) {
-  const [reported, setReported] = useState(false);
+export function AnswerCard({ answer, initialReported, onReport }: Readonly<AnswerCardProps>) {
+  const [localReported, setLocalReported] = useState(false);
+  const reported = initialReported || localReported;
+
+  async function handleReport() {
+    const submitted = await onReport();
+    if (submitted) setLocalReported(true);
+  }
 
   return (
     <article className="rounded-lg border border-zinc-200 dark:border-white/5 bg-white dark:bg-[#18221f] p-4">
@@ -41,7 +49,7 @@ export function AnswerCard({ answer }: Readonly<AnswerCardProps>) {
       ) : (
         <button
           type="button"
-          onClick={() => setReported(true)}
+          onClick={handleReport}
           className="mt-3 inline-flex items-center gap-1 text-xs font-medium text-zinc-400 dark:text-[#7e908c] transition-colors hover:text-red-600 dark:hover:text-red-400"
         >
           <Flag className="size-3.5" />

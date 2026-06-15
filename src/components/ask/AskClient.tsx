@@ -1,21 +1,22 @@
 "use client";
 
 import { ListFilter, MessageSquarePlus } from "lucide-react";
-import Link from "next/link";
-import { useMemo, useState } from "react";
+import { useRouter } from "next/navigation";
+import { useEffect, useMemo, useState } from "react";
 
 import { AskContactCard } from "@/components/ask/AskContactCard";
+import { LoginSheet } from "@/components/ask/LoginSheet";
 import { QuestionCard } from "@/components/ask/QuestionCard";
-import { useAppState } from "@/hooks/useAppState";
+import { useAuth } from "@/hooks/useAuth";
+import { fetchCommunityThreads } from "@/lib/ask-db";
 import {
   askSearchPrompts,
-  getSeedThreads,
-  mergeUserContent,
+  getOfficialThreads,
   searchThreads,
 } from "@/lib/ask";
 import { getAskContactsByIds } from "@/lib/content";
 import { cn } from "@/lib/utils";
-import type { AskCategoryFilter, AskSort } from "@/types/ask";
+import type { AskCategoryFilter, AskSort, AskThread } from "@/types/ask";
 
 const fallbackContacts = getAskContactsByIds([
   "student_services",
@@ -29,40 +30,62 @@ const categoryTabs = [
 ] as const satisfies ReadonlyArray<{ value: AskCategoryFilter; label: string }>;
 
 export function AskClient() {
-  const { askQuestions, askAnswers, isHydrated } = useAppState();
+  const router = useRouter();
+  const { user } = useAuth();
+  const [communityThreads, setCommunityThreads] = useState<AskThread[]>([]);
+  const [isLoading, setIsLoading] = useState(true);
   const [query, setQuery] = useState("");
   const [category, setCategory] = useState<AskCategoryFilter>("all");
   const [sort, setSort] = useState<AskSort>("newest");
+  const [showLogin, setShowLogin] = useState(false);
+
+  useEffect(() => {
+    fetchCommunityThreads()
+      .then(setCommunityThreads)
+      .finally(() => setIsLoading(false));
+  }, []);
 
   const threads = useMemo(() => {
-    const allThreads = mergeUserContent(
-      getSeedThreads(),
-      isHydrated ? askQuestions : [],
-      isHydrated ? askAnswers : {},
-    );
-
+    const allThreads = [...communityThreads, ...getOfficialThreads()];
     return searchThreads(allThreads, query, category, sort);
-  }, [askAnswers, askQuestions, category, isHydrated, query, sort]);
+  }, [communityThreads, query, category, sort]);
+
   const hasQuery = query.trim().length > 0;
 
-  return (
-    <section className="space-y-6">
-      <div>
-        <h2 className="mt-2 text-3xl font-semibold leading-tight text-zinc-950 dark:text-[#e7edeb]">
-          Ask
-        </h2>
-        <p className="mt-3 text-base leading-7 text-zinc-600 dark:text-[#9fb0ad]">
-          Browse questions from other international students, or post your own.
-        </p>
-      </div>
+  function handleAskClick() {
+    if (!user) {
+      setShowLogin(true);
+      return;
+    }
+    router.push("/ask/new");
+  }
 
-      <Link
-        href="/ask/new"
-        className="flex h-12 w-full items-center justify-center gap-2 rounded-md bg-teal-700 dark:bg-teal-400 dark:text-[#0f1a18] px-4 text-sm font-semibold text-white transition-colors hover:bg-teal-800 dark:hover:bg-teal-300"
-      >
-        <MessageSquarePlus className="size-4" />
-        Ask a question
-      </Link>
+  return (
+    <>
+      <LoginSheet
+        isOpen={showLogin}
+        onClose={() => setShowLogin(false)}
+        onSuccess={() => router.push("/ask/new")}
+      />
+
+      <section className="space-y-6">
+        <div>
+          <h2 className="mt-2 text-3xl font-semibold leading-tight text-zinc-950 dark:text-[#e7edeb]">
+            Ask
+          </h2>
+          <p className="mt-3 text-base leading-7 text-zinc-600 dark:text-[#9fb0ad]">
+            Browse questions from other international students, or post your own.
+          </p>
+        </div>
+
+        <button
+          type="button"
+          onClick={handleAskClick}
+          className="flex h-12 w-full items-center justify-center gap-2 rounded-md bg-teal-700 dark:bg-teal-400 dark:text-[#0f1a18] px-4 text-sm font-semibold text-white transition-colors hover:bg-teal-800 dark:hover:bg-teal-300"
+        >
+          <MessageSquarePlus className="size-4" />
+          Ask a question
+        </button>
 
       <div className="space-y-4 rounded-lg border border-zinc-200 dark:border-white/5 bg-white dark:bg-[#18221f] p-4">
         <label
@@ -121,9 +144,11 @@ export function AskClient() {
         <div className="flex items-center justify-between gap-3">
           <h3 className="text-lg font-semibold text-zinc-950 dark:text-[#e7edeb]">
             {hasQuery ? "Results" : "Questions"}{" "}
-            <span className="text-sm font-medium text-zinc-500 dark:text-[#9fb0ad]">
-              ({threads.length})
-            </span>
+            {!isLoading && (
+              <span className="text-sm font-medium text-zinc-500 dark:text-[#9fb0ad]">
+                ({threads.length})
+              </span>
+            )}
           </h3>
           <label className="flex items-center gap-1.5 text-sm text-zinc-500 dark:text-[#9fb0ad]">
             <ListFilter className="size-4 shrink-0" />
@@ -139,7 +164,16 @@ export function AskClient() {
           </label>
         </div>
 
-        {threads.length > 0 ? (
+        {isLoading ? (
+          <div className="grid grid-cols-1 gap-3">
+            {[0, 1, 2].map((i) => (
+              <div
+                key={i}
+                className="h-24 animate-pulse rounded-lg border border-zinc-200 dark:border-white/5 bg-zinc-100 dark:bg-white/5"
+              />
+            ))}
+          </div>
+        ) : threads.length > 0 ? (
           <div className="grid grid-cols-1 gap-3">
             {threads.map((thread) => (
               <QuestionCard key={thread.id} thread={thread} />
@@ -168,7 +202,7 @@ export function AskClient() {
           ))}
         </div>
       </section>
-
     </section>
+    </>
   );
 }

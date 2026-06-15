@@ -1,8 +1,8 @@
 import { ChevronRight } from "lucide-react";
 import Link from "next/link";
 
+import { AccountSection } from "@/components/settings/AccountSection";
 import { FeedbackForm } from "@/components/feedback/FeedbackForm";
-import { ClearDataButton } from "@/components/settings/ClearDataButton";
 import { ThemeToggle } from "@/components/settings/ThemeToggle";
 
 const APP_VERSION = "0.1.0";
@@ -19,6 +19,8 @@ export default function SettingsPage() {
         </p>
       </div>
 
+      <AccountSection />
+
       <ThemeToggle />
 
       <FeedbackForm
@@ -29,17 +31,8 @@ export default function SettingsPage() {
 
       <section className="overflow-hidden rounded-lg border border-zinc-200 dark:border-white/5 bg-white dark:bg-[#18221f]">
         <Link
-          href="/settings/my-feedback"
-          className="flex items-center justify-between gap-3 p-4 transition-colors hover:bg-zinc-50 dark:hover:bg-white/5"
-        >
-          <span className="text-sm font-semibold text-zinc-800 dark:text-[#e7edeb]">
-            My feedback
-          </span>
-          <ChevronRight className="size-5 shrink-0 text-zinc-400 dark:text-[#7e908c]" />
-        </Link>
-        <Link
           href="/settings/about"
-          className="flex items-center justify-between gap-3 border-t border-zinc-100 dark:border-white/5 p-4 transition-colors hover:bg-zinc-50 dark:hover:bg-white/5"
+          className="flex items-center justify-between gap-3 p-4 transition-colors hover:bg-zinc-50 dark:hover:bg-white/5"
         >
           <span className="text-sm font-semibold text-zinc-800 dark:text-[#e7edeb]">
             About the app
@@ -47,8 +40,6 @@ export default function SettingsPage() {
           <ChevronRight className="size-5 shrink-0 text-zinc-400 dark:text-[#7e908c]" />
         </Link>
       </section>
-
-      <ClearDataButton />
 
       <p className="text-center text-xs text-zinc-400 dark:text-[#7e908c]">
         Beta · v{APP_VERSION}

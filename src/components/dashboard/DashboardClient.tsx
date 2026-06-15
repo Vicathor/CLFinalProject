@@ -78,8 +78,7 @@ export function DashboardClient() {
         <div className="rounded-lg border border-red-200 dark:border-red-900/50 bg-red-50 dark:bg-red-950/40 p-4">
           <p className="font-semibold text-red-900 dark:text-red-200">Housing needs attention</p>
           <p className="mt-1 text-sm leading-6 text-red-800 dark:text-red-300">
-            Your housing is not fully resolved, so Housing SOS is treated as an
-            urgent task.
+            Your housing is not fully resolved, so the housing task is treated as urgent.
           </p>
         </div>
       ) : null}

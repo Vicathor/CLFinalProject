@@ -52,5 +52,17 @@
     "title": "Leave buffer time on arrival day",
     "body": "Plan your first day around delays, luggage, key pickup, groceries, and finding your room rather than appointments.",
     "tags": ["arrival", "planning"]
+  },
+  {
+    "id": "tip_supermarket_options",
+    "title": "Mix supermarkets to save money",
+    "body": "Albert Heijn and Jumbo have the widest range but are pricier. Lidl and Aldi are priced cheaper and tailored to the student crowd — worth splitting your shopping between them.",
+    "tags": ["daily-life", "groceries", "money"]
+  },
+  {
+    "id": "tip_kringloop_secondhand",
+    "title": "Keep an eye on Marktplaats",
+    "body": "Keep lookout for ads on Marktplaats (marktplaats.nl). It's got almost everything you'll need and sometimes for gratis (free).",
+    "tags": ["daily-life", "shopping", "arrival"]
   }
 ]

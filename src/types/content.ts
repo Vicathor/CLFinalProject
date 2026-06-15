@@ -21,7 +21,8 @@ export type TopicId =
   | "municipality_bsn_digid"
   | "money_banking"
   | "healthcare_gp"
-  | "transport_daily_life";
+  | "transport_daily_life"
+  | "daily_life";
 
 export type TaskId =
   | "housing_sos"

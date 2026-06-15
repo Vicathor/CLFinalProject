@@ -6,6 +6,7 @@ import {
   Home,
   Landmark,
   Plane,
+  ShoppingBag,
   Wallet,
   type LucideIcon,
 } from "lucide-react";
@@ -30,6 +31,7 @@ const topicVisuals: Record<string, TopicVisual> = {
   money_banking: { Icon: Wallet, bg: "bg-blue-600" },
   healthcare_gp: { Icon: HeartPulse, bg: "bg-red-500" },
   transport_daily_life: { Icon: Bike, bg: "bg-purple-600" },
+  daily_life: { Icon: ShoppingBag, bg: "bg-green-600" },
 };
 
 const fallbackVisual: TopicVisual = { Icon: FileText, bg: "bg-zinc-500" };
@@ -53,7 +55,7 @@ export function TopicCard({ topic }: Readonly<TopicCardProps>) {
             {topic.title}
           </h3>
           <p className="mt-1 text-sm font-medium text-zinc-500 dark:text-[#9fb0ad]">
-            {topic.relatedTaskIds.length} related tasks
+            {topic.relatedTaskIds.length} related {topic.relatedTaskIds.length === 1 ? "task" : "tasks"}
           </p>
         </div>
         <ChevronRight className="mt-0.5 size-5 shrink-0 text-zinc-400 dark:text-[#7e908c] transition-colors group-hover:text-teal-700" />
