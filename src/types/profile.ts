@@ -37,7 +37,7 @@ export type StudentProfile = {
   arrivalDate?: string;
   housingStatus: HousingStatus;
   bsnStatus: BsnStatus;
-  workOrPaidInternship: WorkOrPaidInternship;
+  workOrPaidInternship?: WorkOrPaidInternship;
   hasHousing: boolean;
   hasBsn: boolean;
   needsVisaOrResidencePermit?: boolean;

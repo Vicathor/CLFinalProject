@@ -31,12 +31,6 @@ const bsnLabels = {
   not_sure: "BSN not sure",
 } as const;
 
-const workLabels = {
-  yes: "Working or paid internship",
-  no: "Not working",
-  maybe: "Maybe working",
-} as const;
-
 export function SituationSummary({
   profile,
 }: Readonly<SituationSummaryProps>) {
@@ -45,7 +39,6 @@ export function SituationSummary({
     housingLabels[profile.housingStatus],
     arrivalLabels[profile.onboardingArrivalStatus],
     bsnLabels[profile.bsnStatus],
-    workLabels[profile.workOrPaidInternship],
   ];
 
   return (

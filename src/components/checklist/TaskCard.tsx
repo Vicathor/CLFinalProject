@@ -1,7 +1,8 @@
 "use client";
 
-import { Check } from "lucide-react";
+import { Check, ChevronDown } from "lucide-react";
 import Link from "next/link";
+import { useState } from "react";
 
 import { TaskStatusControl } from "@/components/checklist/TaskStatusControl";
 import { cn } from "@/lib/utils";
@@ -34,8 +35,13 @@ export function TaskCard({
   status,
   onStatusChange,
 }: Readonly<TaskCardProps>) {
-  const isCollapsed = status === "done" || status === "skipped";
+  const [expanded, setExpanded] = useState(false);
+  const isDoneOrSkipped = status === "done" || status === "skipped";
+  const isNotApplicable =
+    task.applicability === "not_applicable" && !isDoneOrSkipped;
+  const isCollapsed = isDoneOrSkipped || (isNotApplicable && !expanded);
   const collapsedLabel = status === "skipped" ? "Not applicable" : "Done";
+  const reason = task.personalisationReasons[0];
 
   return (
     <article
@@ -46,8 +52,8 @@ export function TaskCard({
     >
       {/* Header row — always visible */}
       <div className="flex items-start justify-between gap-3">
-        <div className="flex min-w-0 items-start gap-2.5">
-          {isCollapsed ? (
+        {isDoneOrSkipped ? (
+          <div className="flex min-w-0 items-start gap-2.5">
             <button
               type="button"
               aria-pressed="true"
@@ -57,27 +63,53 @@ export function TaskCard({
             >
               <Check className="size-3.5" strokeWidth={3} />
             </button>
-          ) : null}
-          <h3
-            className={cn(
-              "min-w-0 text-base font-semibold leading-6",
-              isCollapsed
-                ? "truncate text-zinc-500 dark:text-[#9fb0ad] line-through"
-                : "text-zinc-950 dark:text-[#e7edeb]",
-            )}
+            <h3 className="min-w-0 truncate text-base font-semibold leading-6 text-zinc-500 dark:text-[#9fb0ad] line-through">
+              {task.title}
+            </h3>
+          </div>
+        ) : isNotApplicable ? (
+          <button
+            type="button"
+            aria-expanded={expanded}
+            aria-label={`${expanded ? "Collapse" : "Expand"} "${task.title}"`}
+            onClick={() => setExpanded((value) => !value)}
+            className="flex min-w-0 items-start gap-2 text-left"
           >
+            <ChevronDown
+              className={cn(
+                "mt-0.5 size-5 shrink-0 text-zinc-400 dark:text-[#7e908c] transition-transform duration-300",
+                expanded ? "rotate-180" : "",
+              )}
+            />
+            <h3
+              className={cn(
+                "min-w-0 text-base font-semibold leading-6 text-zinc-500 dark:text-[#9fb0ad]",
+                expanded ? "" : "truncate line-through",
+              )}
+            >
+              {task.title}
+            </h3>
+          </button>
+        ) : (
+          <h3 className="min-w-0 text-base font-semibold leading-6 text-zinc-950 dark:text-[#e7edeb]">
             {task.title}
           </h3>
-        </div>
+        )}
         <span
           className={cn(
             "shrink-0 rounded-md px-2 py-1 text-xs font-semibold",
-            isCollapsed
+            isDoneOrSkipped
               ? "text-zinc-400 dark:text-[#7e908c]"
-              : priorityStyles[task.urgency],
+              : isNotApplicable
+                ? "text-zinc-400 dark:text-[#7e908c]"
+                : priorityStyles[task.urgency],
           )}
         >
-          {isCollapsed ? collapsedLabel : priorityLabels[task.urgency]}
+          {isDoneOrSkipped
+            ? collapsedLabel
+            : isNotApplicable
+              ? "Not applicable"
+              : priorityLabels[task.urgency]}
         </span>
       </div>
 
@@ -93,7 +125,13 @@ export function TaskCard({
         <div className="overflow-hidden">
           <div className="space-y-4 pt-3">
             <p className="text-sm leading-6 text-zinc-600 dark:text-[#9fb0ad]">{task.summary}</p>
-            {task.applicability === "maybe_applicable" ? (
+            {task.applicability === "not_applicable" ? (
+              <p className="rounded-md bg-zinc-100 dark:bg-white/5 px-3 py-2 text-sm font-medium text-zinc-600 dark:text-[#9fb0ad]">
+                {reason
+                  ? `Not applicable: ${reason} You can still mark it done if it applies to you.`
+                  : "Marked not applicable based on your answers. You can still mark it done if it applies to you."}
+              </p>
+            ) : task.applicability === "maybe_applicable" ? (
               <p className="rounded-md bg-amber-50 dark:bg-amber-950/40 px-3 py-2 text-sm font-medium text-amber-900 dark:text-amber-300">
                 Maybe applicable based on your answers
               </p>

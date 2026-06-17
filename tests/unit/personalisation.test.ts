@@ -12,7 +12,6 @@ import type {
   OnboardingArrivalStatus,
   ResidencyCategory,
   StudentProfile,
-  WorkOrPaidInternship,
 } from "@/types/profile";
 
 function createProfile(overrides: {
@@ -20,7 +19,6 @@ function createProfile(overrides: {
   housingStatus: HousingStatus;
   onboardingArrivalStatus: OnboardingArrivalStatus;
   bsnStatus: BsnStatus;
-  workOrPaidInternship: WorkOrPaidInternship;
 }): StudentProfile {
   return {
     id: "test-profile",
@@ -43,13 +41,12 @@ function byId(tasks: ReturnType<typeof getPersonalisedTasks>, taskId: TaskId) {
 }
 
 describe("personalisation", () => {
-  it("prioritises non-EU users with no housing before arrival and maybe working", () => {
+  it("prioritises non-EU users with no housing before arrival", () => {
     const profile = createProfile({
       residencyCategory: "non_eu_eea",
       housingStatus: "searching",
       onboardingArrivalStatus: "before_arrival",
       bsnStatus: "no",
-      workOrPaidInternship: "maybe",
     });
     const tasks = getPersonalisedTasks(getAllTasks(), profile);
     const topActions = getTopNextActions(tasks, {}, 3).map((task) => task.id);
@@ -59,7 +56,7 @@ describe("personalisation", () => {
       urgency: "important",
       applicability: "applicable",
     });
-    expect(byId(tasks, "health_insurance").urgency).toBe("important");
+    expect(byId(tasks, "health_insurance").urgency).toBe("normal");
     expect(topActions).toContain("housing_sos");
   });
 
@@ -69,19 +66,21 @@ describe("personalisation", () => {
       housingStatus: "confirmed",
       onboardingArrivalStatus: "before_arrival",
       bsnStatus: "no",
-      workOrPaidInternship: "no",
     });
     const tasks = getPersonalisedTasks(getAllTasks(), profile);
 
     expect(byId(tasks, "housing_sos")).toMatchObject({
       urgency: "later",
-      applicability: "maybe_applicable",
+      applicability: "not_applicable",
     });
-    expect(byId(tasks, "visa_residence_permit").urgency).toBe("normal");
+    expect(byId(tasks, "visa_residence_permit")).toMatchObject({
+      urgency: "later",
+      applicability: "not_applicable",
+    });
     expect(byId(tasks, "health_insurance").urgency).toBe("normal");
-    expect(getTopNextActions(tasks, {}, 3).map((task) => task.id)).not.toContain(
-      "housing_sos",
-    );
+    const topActions = getTopNextActions(tasks, {}, 3).map((task) => task.id);
+    expect(topActions).not.toContain("housing_sos");
+    expect(topActions).not.toContain("visa_residence_permit");
   });
 
   it("makes municipality registration and BSN urgent after arrival without BSN", () => {
@@ -90,7 +89,6 @@ describe("personalisation", () => {
       housingStatus: "temporary_only",
       onboardingArrivalStatus: "already_arrived",
       bsnStatus: "no",
-      workOrPaidInternship: "maybe",
     });
     const tasks = getPersonalisedTasks(getAllTasks(), profile);
     const topActions = getTopNextActions(tasks, {}, 3).map((task) => task.id);
@@ -98,7 +96,6 @@ describe("personalisation", () => {
     expect(byId(tasks, "housing_sos").urgency).toBe("urgent");
     expect(byId(tasks, "municipality_registration").urgency).toBe("urgent");
     expect(byId(tasks, "bsn").urgency).toBe("urgent");
-    expect(byId(tasks, "health_insurance").urgency).toBe("important");
     expect(topActions).toEqual(
       expect.arrayContaining([
         "housing_sos",
@@ -114,7 +111,6 @@ describe("personalisation", () => {
       housingStatus: "confirmed",
       onboardingArrivalStatus: "before_arrival",
       bsnStatus: "not_sure",
-      workOrPaidInternship: "no",
     });
     const tasks = getPersonalisedTasks(getAllTasks(), profile);
 
@@ -124,20 +120,31 @@ describe("personalisation", () => {
     });
   });
 
-  it("moves BSN later when the user already has a BSN", () => {
+  it("marks tasks not applicable for an EU user who has arrived with housing and a BSN", () => {
     const profile = createProfile({
       residencyCategory: "eu_eea_swiss",
       housingStatus: "confirmed",
       onboardingArrivalStatus: "already_arrived",
       bsnStatus: "yes",
-      workOrPaidInternship: "no",
     });
     const tasks = getPersonalisedTasks(getAllTasks(), profile);
 
-    expect(byId(tasks, "bsn")).toMatchObject({
-      urgency: "later",
-      applicability: "maybe_applicable",
-    });
+    expect(byId(tasks, "bsn").applicability).toBe("not_applicable");
+    expect(byId(tasks, "housing_sos").applicability).toBe("not_applicable");
+    expect(byId(tasks, "visa_residence_permit").applicability).toBe(
+      "not_applicable",
+    );
+    expect(byId(tasks, "plan_arrival").applicability).toBe("not_applicable");
+    expect(byId(tasks, "municipality_registration").applicability).toBe(
+      "not_applicable",
+    );
+
+    const topActions = getTopNextActions(tasks, {}, 5).map((task) => task.id);
+    expect(topActions).not.toContain("bsn");
+    expect(topActions).not.toContain("housing_sos");
+    expect(topActions).not.toContain("visa_residence_permit");
+    expect(topActions).not.toContain("plan_arrival");
+    expect(topActions).not.toContain("municipality_registration");
   });
 
   it("produces different top next actions for different profiles", () => {
@@ -146,14 +153,12 @@ describe("personalisation", () => {
       housingStatus: "searching",
       onboardingArrivalStatus: "before_arrival",
       bsnStatus: "no",
-      workOrPaidInternship: "maybe",
     });
     const secondProfile = createProfile({
       residencyCategory: "eu_eea_swiss",
       housingStatus: "confirmed",
       onboardingArrivalStatus: "before_arrival",
       bsnStatus: "no",
-      workOrPaidInternship: "no",
     });
 
     const firstTopActions = getTopNextActions(

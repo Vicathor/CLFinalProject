@@ -4,7 +4,10 @@ import type { TaskProgress } from "@/types/progress";
 
 export type TaskUrgency = "urgent" | "important" | "normal" | "later";
 
-export type TaskApplicability = "applicable" | "maybe_applicable";
+export type TaskApplicability =
+  | "applicable"
+  | "maybe_applicable"
+  | "not_applicable";
 
 export type PersonalisedTask = Task & {
   urgency: TaskUrgency;
@@ -44,12 +47,6 @@ function hasNoOrUnknownBsn(profile: StudentProfile) {
   return profile.bsnStatus === "no" || profile.bsnStatus === "not_sure";
 }
 
-function hasWorkOrInternshipPlan(profile: StudentProfile) {
-  return (
-    profile.workOrPaidInternship === "yes" ||
-    profile.workOrPaidInternship === "maybe"
-  );
-}
 
 function createPersonalisedTask(task: Task): PersonalisedTask {
   return {
@@ -102,9 +99,19 @@ export function getPersonalisedTasks(
       return applyPersonalisation(
         task,
         "later",
-        "maybe_applicable",
-        -80,
-        "You already indicated that you have housing.",
+        "not_applicable",
+        -100,
+        "You already have confirmed housing.",
+      );
+    }
+
+    if (task.id === "plan_arrival" && isAlreadyArrived(profile)) {
+      return applyPersonalisation(
+        task,
+        "later",
+        "not_applicable",
+        -100,
+        "You have already arrived.",
       );
     }
 
@@ -132,6 +139,19 @@ export function getPersonalisedTasks(
     }
 
     if (
+      task.id === "visa_residence_permit" &&
+      profile.residencyCategory === "eu_eea_swiss"
+    ) {
+      return applyPersonalisation(
+        task,
+        "later",
+        "not_applicable",
+        -100,
+        "EU/EEA/Swiss students do not need an MVV or residence permit.",
+      );
+    }
+
+    if (
       (task.id === "municipality_registration" || task.id === "bsn") &&
       isAlreadyArrived(profile) &&
       hasNoOrUnknownBsn(profile)
@@ -145,13 +165,16 @@ export function getPersonalisedTasks(
       );
     }
 
-    if (task.id === "health_insurance" && hasWorkOrInternshipPlan(profile)) {
+    if (
+      task.id === "municipality_registration" &&
+      profile.bsnStatus === "yes"
+    ) {
       return applyPersonalisation(
         task,
-        "important",
-        "applicable",
-        500,
-        "Work or a paid internship can affect health insurance rules.",
+        "later",
+        "not_applicable",
+        -100,
+        "You already have a BSN, so you have registered with the municipality.",
       );
     }
 
@@ -159,9 +182,9 @@ export function getPersonalisedTasks(
       return applyPersonalisation(
         task,
         "later",
-        "maybe_applicable",
-        -60,
-        "You already indicated that you have a BSN.",
+        "not_applicable",
+        -100,
+        "You already have a BSN.",
       );
     }
 
@@ -201,7 +224,9 @@ export function getTopNextActions(
 ) {
   return sortPersonalisedTasks(
     personalisedTasks.filter(
-      (task) => !isCompletedOrSkipped(task.id, taskProgress),
+      (task) =>
+        task.applicability !== "not_applicable" &&
+        !isCompletedOrSkipped(task.id, taskProgress),
     ),
   ).slice(0, limit);
 }

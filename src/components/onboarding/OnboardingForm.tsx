@@ -13,7 +13,6 @@ import type {
   OnboardingArrivalStatus,
   ResidencyCategory,
   StudentProfile,
-  WorkOrPaidInternship,
 } from "@/types/profile";
 
 type OnboardingAnswers = {
@@ -21,7 +20,6 @@ type OnboardingAnswers = {
   housingStatus?: HousingStatus;
   onboardingArrivalStatus?: OnboardingArrivalStatus;
   bsnStatus?: BsnStatus;
-  workOrPaidInternship?: WorkOrPaidInternship;
 };
 
 type StepConfig = {
@@ -77,17 +75,6 @@ const steps: readonly StepConfig[] = [
       { label: "Not sure", value: "not_sure" },
     ],
   },
-  {
-    key: "workOrPaidInternship",
-    title: "Planning to work or intern?",
-    subtitle: "We'll add tax and permit guidance if you are.",
-    illustration: "/illustrations/step5.svg",
-    options: [
-      { label: "Yes", value: "yes" },
-      { label: "No", value: "no" },
-      { label: "Maybe later", value: "maybe" },
-    ],
-  },
 ];
 
 function isComplete(answers: OnboardingAnswers) {
@@ -95,8 +82,7 @@ function isComplete(answers: OnboardingAnswers) {
     answers.residencyCategory &&
       answers.housingStatus &&
       answers.onboardingArrivalStatus &&
-      answers.bsnStatus &&
-      answers.workOrPaidInternship,
+      answers.bsnStatus,
   );
 }
 
@@ -119,7 +105,6 @@ function createProfile(answers: Required<OnboardingAnswers>): StudentProfile {
         : "arrived",
     housingStatus: answers.housingStatus,
     bsnStatus: answers.bsnStatus,
-    workOrPaidInternship: answers.workOrPaidInternship,
     hasHousing: answers.housingStatus === "confirmed",
     hasBsn: answers.bsnStatus === "yes",
     needsVisaOrResidencePermit:

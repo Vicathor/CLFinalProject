@@ -39,7 +39,9 @@ const expectedTopicIds = [
   "municipality_bsn_digid",
   "money_banking",
   "healthcare_gp",
+  "phone_sim",
   "transport_daily_life",
+  "university_life",
   "daily_life",
 ] as const satisfies readonly TopicId[];
 

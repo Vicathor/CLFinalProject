@@ -12,7 +12,6 @@ const arrivedWithoutBsnProfile: StudentProfile = {
   housingStatus: "temporary_only",
   onboardingArrivalStatus: "already_arrived",
   bsnStatus: "no",
-  workOrPaidInternship: "maybe",
   hasHousing: false,
   hasBsn: false,
   createdAt: "2026-06-07T00:00:00.000Z",
