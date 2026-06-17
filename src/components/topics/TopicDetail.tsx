@@ -25,6 +25,10 @@ function getBodySections(body: string) {
     .filter(Boolean);
 }
 
+function isSubheading(section: string) {
+  return section.length < 60 && !/[.!?]$/.test(section);
+}
+
 export function TopicDetail({ topic }: Readonly<TopicDetailProps>) {
   const relatedTasks = topic.relatedTaskIds.flatMap((taskId) => {
     const task = getTaskById(taskId);
@@ -56,11 +60,17 @@ export function TopicDetail({ topic }: Readonly<TopicDetailProps>) {
 
       <section className="space-y-3 rounded-lg border border-zinc-200 dark:border-white/5 bg-white dark:bg-[#18221f] p-4">
         <h3 className="text-base font-semibold text-zinc-950 dark:text-[#e7edeb]">Overview</h3>
-        {getBodySections(topic.body).map((section) => (
-          <p key={section} className="text-sm leading-6 text-zinc-600 dark:text-[#9fb0ad]">
-            {section}
-          </p>
-        ))}
+        {getBodySections(topic.body).map((section) =>
+          isSubheading(section) ? (
+            <p key={section} className="text-sm font-semibold text-zinc-800 dark:text-[#e7edeb]">
+              {section}
+            </p>
+          ) : (
+            <p key={section} className="text-sm leading-6 text-zinc-600 dark:text-[#9fb0ad]">
+              {section}
+            </p>
+          )
+        )}
       </section>
 
       <RelatedTasks tasks={relatedTasks} />

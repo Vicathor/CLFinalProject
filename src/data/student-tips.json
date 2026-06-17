@@ -56,7 +56,7 @@
   {
     "id": "tip_supermarket_options",
     "title": "Mix supermarkets to save money",
-    "body": "Albert Heijn and Jumbo have the widest range but are pricier. Lidl and Aldi are priced cheaper and tailored to the student crowd — worth splitting your shopping between them.",
+    "body": "Albert Heijn and Jumbo have the widest range but are pricier. Lidl and Aldi are priced cheaper and tailored to the student crowd - worth splitting your shopping between them.",
     "tags": ["daily-life", "groceries", "money"]
   },
   {
@@ -64,5 +64,29 @@
     "title": "Keep an eye on Marktplaats",
     "body": "Keep lookout for ads on Marktplaats (marktplaats.nl). It's got almost everything you'll need and sometimes for gratis (free).",
     "tags": ["daily-life", "shopping", "arrival"]
+  },
+  {
+    "id": "tip_check_canvas_daily",
+    "title": "Check Canvas every day in your first week",
+    "body": "Assignments, announcements, and deadlines all live in Canvas. Missing an early post is a common way to fall behind - build the habit before lectures start.",
+    "tags": ["university", "academic"]
+  },
+  {
+    "id": "tip_mazemap_download",
+    "title": "Download MazeMap before your first day",
+    "body": "The UT campus is large and confusing at first. MazeMap gives you indoor maps of every building - download it before you arrive so you're not hunting for your room on day one.",
+    "tags": ["university", "campus", "arrival"]
+  },
+  {
+    "id": "tip_kickin_attend",
+    "title": "Go to Kick-In if you can",
+    "body": "Kick-In is UT's introduction week and happens just before the semester starts. It's the single best way to meet people and find out what's going on socially - most international friendships start here.",
+    "tags": ["university", "social", "arrival"]
+  },
+  {
+    "id": "tip_student_psychologist",
+    "title": "The student psychologist is free - use it",
+    "body": "UT offers free counselling through its student psychologist service. You don't need to be in crisis - it's there for stress, adjustment, and anything in between.",
+    "tags": ["university", "wellbeing"]
   }
 ]

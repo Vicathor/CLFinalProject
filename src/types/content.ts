@@ -22,7 +22,9 @@ export type TopicId =
   | "money_banking"
   | "healthcare_gp"
   | "transport_daily_life"
-  | "daily_life";
+  | "daily_life"
+  | "university_life"
+  | "phone_sim";
 
 export type TaskId =
   | "housing_sos"

@@ -1,5 +1,17 @@
 [
   {
+    "id": "belastingdienst_huurtoeslag",
+    "title": "Belastingdienst: Rent benefit (huurtoeslag)",
+    "url": "https://www.belastingdienst.nl/wps/wcm/connect/bldcontentnl/belastingdienst/prive/toeslagen/huurtoeslag/",
+    "lastChecked": "2026-06-16"
+  },
+  {
+    "id": "roomspot",
+    "title": "Roomspot: Student housing portal",
+    "url": "https://www.roomspot.nl/en",
+    "lastChecked": "2026-06-16"
+  },
+  {
     "id": "study_housing",
     "title": "Study in NL: Finding a place to live",
     "url": "https://www.studyinnl.org/plan-your-stay/finding-a-place-to-live",
@@ -42,6 +54,12 @@
     "lastChecked": "2026-06-07"
   },
   {
+    "id": "gemeente_enschede",
+    "title": "Gemeente Enschede",
+    "url": "https://www.enschede.nl/",
+    "lastChecked": "2026-06-17"
+  },
+  {
     "id": "gov_moving_netherlands",
     "title": "Government.nl: What to arrange when moving to the Netherlands",
     "url": "https://www.government.nl/faq/what-do-i-need-to-arrange-if-im-moving-to-the-netherlands",
@@ -64,6 +82,18 @@
     "title": "DigiD: Apply for a DigiD",
     "url": "https://www.digid.nl/en/apply-and-activate/apply-digid/",
     "lastChecked": "2026-06-07"
+  },
+  {
+    "id": "campus_huisarts",
+    "title": "Campus Huisarts UT",
+    "url": "https://www.campushuisarts.nl/en/",
+    "lastChecked": "2026-06-17"
+  },
+  {
+    "id": "aon_student_insurance",
+    "title": "AON Student Insurance",
+    "url": "https://www.aonstudentinsurance.com/en/home/",
+    "lastChecked": "2026-06-17"
   },
   {
     "id": "study_healthcare_insurance",
@@ -90,6 +120,12 @@
     "lastChecked": "2026-06-07"
   },
   {
+    "id": "iamexpat_mobile",
+    "title": "IamExpat: Mobile phone providers and SIM cards in the Netherlands",
+    "url": "https://www.iamexpat.nl/expat-info/communication/mobile-phone-providers-sim-card-netherlands",
+    "lastChecked": "2026-06-17"
+  },
+  {
     "id": "gov_112_mobile",
     "title": "Government.nl: Calling 112 from a mobile phone",
     "url": "https://www.government.nl/faq/will-the-operator-immediately-see-my-number-and-location-if-i-call-from-my-mobile",
@@ -108,10 +144,28 @@
     "lastChecked": "2026-06-07"
   },
   {
+    "id": "ns",
+    "title": "NS: Dutch national rail",
+    "url": "https://www.ns.nl/en",
+    "lastChecked": "2026-06-17"
+  },
+  {
     "id": "acm_mobile_roaming",
     "title": "ACM ConsuWijzer: Mobile calling and internet in the EU",
     "url": "https://consument.acm.nl/telefoon-internet-en-televisie/internationaal-bellen-en-internetten/hoeveel-betaal-ik-voor-mobiel-bellen-en-internetten-een-ander-eu-land",
     "lastChecked": "2026-06-07"
+  },
+  {
+    "id": "iamexpat_banking",
+    "title": "IamExpat: Banking in the Netherlands",
+    "url": "https://www.iamexpat.nl/expat-info/money-taxation/banking-in-the-netherlands",
+    "lastChecked": "2026-06-17"
+  },
+  {
+    "id": "tikkie",
+    "title": "Tikkie: Payment requests in the Netherlands",
+    "url": "https://www.tikkie.me/",
+    "lastChecked": "2026-06-17"
   },
   {
     "id": "dutch_payments_iban",
@@ -130,5 +184,29 @@
     "title": "Visit Enschede: Discover Enschede",
     "url": "https://www.visit-enschede.com/discover-enschede",
     "lastChecked": "2026-06-15"
+  },
+  {
+    "id": "esn_twente",
+    "title": "ESN Twente: Events for international students",
+    "url": "https://esntwente.nl/",
+    "lastChecked": "2026-06-16"
+  },
+  {
+    "id": "ut_student_union",
+    "title": "UT Student Union: Associations",
+    "url": "https://su.utwente.nl/en/",
+    "lastChecked": "2026-06-16"
+  },
+  {
+    "id": "ut_sports",
+    "title": "UT Sports Centre: Membership and activities",
+    "url": "https://www.utwente.nl/en/sports-and-culture/associations/sports/",
+    "lastChecked": "2026-06-16"
+  },
+  {
+    "id": "ut_language_centre",
+    "title": "UT Language Centre: Dutch courses for international students",
+    "url": "https://www.utwente.nl/en/language-centre/",
+    "lastChecked": "2026-06-16"
   }
 ]

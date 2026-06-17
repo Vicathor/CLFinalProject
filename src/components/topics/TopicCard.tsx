@@ -2,11 +2,13 @@ import {
   Bike,
   ChevronRight,
   FileText,
+  GraduationCap,
   HeartPulse,
   Home,
   Landmark,
   Plane,
   ShoppingBag,
+  Smartphone,
   Wallet,
   type LucideIcon,
 } from "lucide-react";
@@ -32,6 +34,8 @@ const topicVisuals: Record<string, TopicVisual> = {
   healthcare_gp: { Icon: HeartPulse, bg: "bg-red-500" },
   transport_daily_life: { Icon: Bike, bg: "bg-purple-600" },
   daily_life: { Icon: ShoppingBag, bg: "bg-green-600" },
+  university_life: { Icon: GraduationCap, bg: "bg-sky-600" },
+  phone_sim: { Icon: Smartphone, bg: "bg-cyan-600" },
 };
 
 const fallbackVisual: TopicVisual = { Icon: FileText, bg: "bg-zinc-500" };
